@@ -19,7 +19,25 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    if (auth()->user()->hasRole('admin')) {
+        return redirect()->route('admin.dashboard');
+    }
+    if (auth()->user()->hasRole('frontdesk')) {
+        return redirect()->route('frontdesk.dashboard');
+    }
+
+    if (auth()->user()->hasRole('roomboy')) {
+        return "roomboy";
+    }
+
+    if (auth()->user()->hasRole('kitchen')) {
+        return "kitchen";
+    }
+
+    if (auth()->user()->hasRole('kiosk')) {
+        return redirect()->route('kiosk.index');
+    }
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
