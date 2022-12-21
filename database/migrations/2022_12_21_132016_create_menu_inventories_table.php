@@ -12,12 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('menu_inventories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id');
-            $table->unsignedBigInteger('meal_category_id');
-            $table->string('name');
-            $table->bigInteger('price');
+            $table->foreignId('menu_id');
+            $table->BigInteger('stocks');
+            $table->double('servings');
+            $table->double('total_servings');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('menu_inventories');
     }
 };

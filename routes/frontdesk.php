@@ -9,7 +9,7 @@ Route::prefix('frontdesk')->middleware(['auth', 'role:frontdesk', 'has_frontend'
         return view('v1.frontdesk.check-in.index');
     })->name('frontdesk.check-in');
     Route::get('/check-in/{guest}/view-guest', function ($guest) {
-        return view('v1.frontdesk.check-in.view-guest',[
+        return view('v1.frontdesk.check-in.view-guest', [
             'guest' => $guest,
         ]);
     })->name('frontdesk.check-in.view-guest');

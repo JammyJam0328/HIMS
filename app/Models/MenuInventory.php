@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MealCategory extends Model
+class MenuInventory extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
-    public function menus()
+    public function menu()
     {
-        return $this->hasMany(Menu::class);
+        return $this->belongsTo(Menu::class);
     }
 }

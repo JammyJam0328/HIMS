@@ -19,31 +19,58 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    if (auth()->user()->hasRole('admin')) {
+    if (
+        auth()
+            ->user()
+            ->hasRole('admin')
+    ) {
         return redirect()->route('admin.dashboard');
     }
-    if (auth()->user()->hasRole('frontdesk')) {
+    if (
+        auth()
+            ->user()
+            ->hasRole('frontdesk')
+    ) {
         return redirect()->route('frontdesk.dashboard');
     }
 
-    if (auth()->user()->hasRole('roomboy')) {
-        return "roomboy";
+    if (
+        auth()
+            ->user()
+            ->hasRole('roomboy')
+    ) {
+        return 'roomboy';
     }
 
-    if (auth()->user()->hasRole('kitchen')) {
-        return "kitchen";
+    if (
+        auth()
+            ->user()
+            ->hasRole('kitchen')
+    ) {
+        return redirect()->route('kitchen.index');
     }
 
-    if (auth()->user()->hasRole('kiosk')) {
+    if (
+        auth()
+            ->user()
+            ->hasRole('kiosk')
+    ) {
         return redirect()->route('kiosk.index');
     }
-
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name(
+        'profile.edit'
+    );
+    Route::patch('/profile', [ProfileController::class, 'update'])->name(
+        'profile.update'
+    );
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name(
+        'profile.destroy'
+    );
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -49,5 +49,15 @@ class BranchSeeder extends Seeder
         ]);
 
         $kiosk->assignRole('kiosk');
+
+        $kitchen = User::create([
+            'name' => 'ALMA Kitchen',
+            'email' => 'almakitchen@gmail.com',
+            'password' => bcrypt('password'),
+            'branch_id' => $branch->id,
+            'branch_name' => $branch->name,
+        ]);
+
+        $kitchen->assignRole('kitchen');
     }
 }

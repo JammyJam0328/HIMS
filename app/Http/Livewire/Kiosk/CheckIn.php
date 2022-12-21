@@ -149,8 +149,8 @@ class CheckIn extends Component
             'staying_hour_id' => $this->roomRate->staying_hour_id,
             'staying_hours' => $this->isLongStay ? $this->roomRate->stayingHour->number * $this->longStayDays : $this->roomRate->stayingHour->number,
             'is_long_stay' => $this->isLongStay ? 1 : 0,
-            'long_stay_number_of_days'=> $this->longStayDays ?? null,
-            'check_in_amount' =>$this->longStayDays ? $this->roomRate->amount * $this->longStayDays : $this->roomRate->amount,
+            'long_stay_number_of_days' => $this->longStayDays ?? null,
+            'check_in_amount' => $this->longStayDays ? $this->roomRate->amount * $this->longStayDays : $this->roomRate->amount,
         ]);
 
         $this->generatedQrCode = $guest->qr_code; // GuestObserver.php

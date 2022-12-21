@@ -10,8 +10,11 @@ class ViewGuest extends Component
     public $guest;
 
     public $totalAmountToPay = 0;
+
     public $changeAmount = 0;
+
     public $givenAmount = 0;
+
     public $changeSaveToDeposit = false;
 
     public function mount($guest)
@@ -22,6 +25,7 @@ class ViewGuest extends Component
             ->first(), 404);
         $this->totalAmountToPay = $this->guest->check_in_amount + 200;
     }
+
     public function render()
     {
         return view('livewire.frontdesk.check-in.view-guest');
