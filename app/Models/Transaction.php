@@ -11,15 +11,16 @@ class Transaction extends Model
 
     protected $guarded = [];
 
-    const types = [
-        'checked_in_room',
-        'food',
-        'laundry',
-        'load',
-        'extension',
-        'amenities',
-        'beverage',
-        'damage',
+    const TYPES = [
+        'checked_in_room' => 'Checked In',
+        'food' => 'Food',
+        'laundry' => 'Laundry',
+        'load' => 'Load',
+        'extension' => 'Extension',
+        'amenities' => 'Amenities',
+        'beverage' => 'Beverage',
+        'damage' => 'Damage',
+        'transfer_room' => 'Transfer Room',
     ];
 
     const CHECKED_IN_ROOM = 'checked_in_room';
@@ -38,6 +39,8 @@ class Transaction extends Model
 
     const DAMAGE = 'damage';
 
+    const TRANSFER_ROOM = 'transfer_room';
+
     public function room()
     {
         return $this->belongsTo(Room::class);
@@ -51,5 +54,10 @@ class Transaction extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+
+    public function frontdesks()
+    {
+        return \json_decode($this->frontdesks);
     }
 }

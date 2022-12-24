@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Kiosk;
 
+use App\Jobs\ProcessTerminatedGuest;
 use App\Models\Guest;
 use App\Models\Rate;
 use App\Models\Room;
 use App\Models\Type;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -139,15 +139,16 @@ class CheckIn extends Component
             'name' => $this->name,
             'contact_number' => $this->contactNumber,
             'room_id' => $this->roomId,
+            'initial_room_id' => $this->roomId,
             'type_id' => $this->typeId,
             'floor_id' => $this->floorId,
             'rate_id' => $this->rateId,
             'room_number' => $this->roomNumber,
-            'checkin_at' => Carbon::now(),
             'status' => Guest::IN_KIOSK,
             'type' => Guest::WALK_IN,
             'staying_hour_id' => $this->roomRate->staying_hour_id,
             'staying_hours' => $this->isLongStay ? $this->roomRate->stayingHour->number * $this->longStayDays : $this->roomRate->stayingHour->number,
+            'static_staying_hours' => $this->isLongStay ? $this->roomRate->stayingHour->number * $this->longStayDays : $this->roomRate->stayingHour->number,
             'is_long_stay' => $this->isLongStay ? 1 : 0,
             'long_stay_number_of_days' => $this->longStayDays ?? null,
             'check_in_amount' => $this->longStayDays ? $this->roomRate->amount * $this->longStayDays : $this->roomRate->amount,
@@ -157,12 +158,12 @@ class CheckIn extends Component
 
         // update room status
         $room = Room::find($this->roomId);
-        $room->status = Room::OCCUPIED;
-        $room->last_checkin_at = Carbon::now();
+        $room->status = Room::SELECTED_IN_KIOSK;
         $room->is_priority = false;
         $room->save();
         //
         $this->step = 5;
+        ProcessTerminatedGuest::dispatch($guest->id)->delay(now()->addHours(2));
         DB::commit();
     }
 

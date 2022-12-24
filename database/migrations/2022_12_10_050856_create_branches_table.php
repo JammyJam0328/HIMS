@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
+            $table->integer('setting_extension_resetting_hours')->default(24)->nullable();
+            $table->string('setting_administrator_code')->default('12345')->nullable();
             $table->timestamps();
         });
     }

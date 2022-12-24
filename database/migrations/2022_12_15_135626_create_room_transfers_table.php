@@ -15,17 +15,21 @@ return new class extends Migration
     {
         Schema::create('room_transfers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->nullable();
-            $table->foreignId('guest_id')->nullable();
-            //
-            $table->string('from_room_type');
-            $table->string('to_room_type');
-            //
-            //
+            $table->foreignId('branch_id');
+            $table->foreignId('guest_id');
+
+            $table->unsignedBigInteger('from_room_id');
+            $table->unsignedBigInteger('from_room_type_id');
+
+            $table->unsignedBigInteger('to_room_id');
+            $table->unsignedBigInteger('to_room_type_id');
+
+            // static data
             $table->string('from_room_number');
+            $table->string('from_room_type');
+
             $table->string('to_room_number');
-            //
-            $table->string('amount');
+            $table->string('to_room_type');
             $table->timestamps();
         });
     }

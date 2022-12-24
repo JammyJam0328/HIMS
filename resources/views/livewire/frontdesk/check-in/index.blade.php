@@ -51,7 +51,7 @@
                         <x-table.cell>
                             <a type="button"
                                 href="{{ route('frontdesk.check-in.view-guest', ['guest' => $guest->id]) }}"
-                                class="inline-flex items-center px-4 py-1 text-sm font-semibold text-white transition bg-yellow-500 rounded-full group hover:bg-yellow-600">
+                                class="group inline-flex items-center rounded-full bg-yellow-500 px-4 py-1 text-sm font-semibold text-white transition hover:bg-yellow-600">
                                 View
                                 <svg class="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
                                     fill="none"
@@ -59,7 +59,7 @@
                                     height="10"
                                     viewBox="0 0 10 10"
                                     aria-hidden="true">
-                                    <path class="transition opacity-0 group-hover:opacity-100"
+                                    <path class="opacity-0 transition group-hover:opacity-100"
                                         d="M0 5h7"></path>
                                     <path class="transition group-hover:translate-x-[3px]"
                                         d="M1 1l4 4-4 4"></path>
@@ -82,15 +82,71 @@
         </div>
         <div class="col-span-4">
             <div class="grid gap-5">
-                <div class="p-4 bg-green-100 rounded-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum quidem, facere
-                    praesentium, asperiores distinctio nemo dolor sunt odit nam necessitatibus, temporibus debitis
-                    officiis ullam magnam eum omnis alias reprehenderit?
+                <div class="rounded-lg bg-green-100 p-3">
+                    <div class="mb-3">
+                        <h1 class="font-bold uppercase text-green-700">
+                            Recent Check Ins
+                        </h1>
+                    </div>
+                    <ul role="list"
+                        class="divide-y divide-gray-200">
+                        @forelse ($recentCheckIns as $recentCheckIn)
+                            <li class="flex justify-between rounded-lg border border-green-500 p-2">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        {{ $recentCheckIn->name }}
+                                    </p>
+                                    <p class="text-sm text-gray-500">
+                                        {{ $recentCheckIn->qr_code }}
+                                    </p>
+                                </div>
+                                <span class="font-semibold text-green-600">
+                                    ROOM # {{ $recentCheckIn->room_number }}
+                                </span>
+                            </li>
+                        @empty
+                            <li class="flex py-4">
+                                <div class="ml-3">
+                                    <p class="text-center text-sm font-medium text-gray-900">
+                                        No recent check-ins
+                                    </p>
+                                </div>
+                            </li>
+                        @endforelse
+                    </ul>
                 </div>
-                <div class="p-4 bg-red-100 rounded-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum quidem, facere
-                    praesentium, asperiores distinctio nemo dolor sunt odit nam necessitatibus, temporibus debitis
-                    officiis ullam magnam eum omnis alias reprehenderit?
+                <div class="rounded-lg bg-red-100 p-3">
+                    <div class="mb-3">
+                        <h1 class="font-bold uppercase text-red-700">
+                            TERMINATED GUESTS
+                        </h1>
+                    </div>
+                    <ul role="list"
+                        class="divide-y divide-gray-200">
+                        @forelse ($terminatedGuests as $terminatedGuest)
+                            <li class="flex justify-between rounded-lg border border-red-500 p-2">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        {{ $terminatedGuest->name }}
+                                    </p>
+                                    <p class="text-sm text-gray-500">
+                                        {{ $terminatedGuest->qr_code }}
+                                    </p>
+                                </div>
+                                <span class="font-semibold text-red-600">
+                                    ROOM # {{ $terminatedGuest->room_number }}
+                                </span>
+                            </li>
+                        @empty
+                            <li class="flex py-4">
+                                <div class="ml-3">
+                                    <p class="text-center text-sm font-medium text-gray-900">
+                                        No records found
+                                    </p>
+                                </div>
+                            </li>
+                        @endforelse
+                    </ul>
                 </div>
             </div>
         </div>
