@@ -27,17 +27,16 @@ Route::get('/dashboard', function () {
     }
 
     if (auth()->user()->hasRole('roomboy')) {
-        return "roomboy";
+        return 'roomboy';
     }
 
     if (auth()->user()->hasRole('kitchen')) {
-        return "kitchen";
+        return 'kitchen';
     }
 
     if (auth()->user()->hasRole('kiosk')) {
         return redirect()->route('kiosk.index');
     }
-
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

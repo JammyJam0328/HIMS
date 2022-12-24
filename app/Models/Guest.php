@@ -48,9 +48,9 @@ class Guest extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function type()
+    public function roomType()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     public function floor()
@@ -66,5 +66,15 @@ class Guest extends Model
     public function rate()
     {
         return $this->belongsTo(Rate::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function deposits()
+    {
+        return $this->hasMany(Deposit::class);
     }
 }

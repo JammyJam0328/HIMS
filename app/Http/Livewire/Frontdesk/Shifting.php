@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Frontdesk;
 
-use Livewire\Component;
 use App\Models\Employee;
 use App\Models\Frontdesk;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Shifting extends Component
 {

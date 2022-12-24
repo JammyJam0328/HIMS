@@ -8,7 +8,7 @@
             <div class="overflow-hidden border border-gray-200 shadow-sm md:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-300">
                     @if ($header)
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-700">
                             <tr>
                                 {{ $header }}
                             </tr>

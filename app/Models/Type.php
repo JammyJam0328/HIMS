@@ -25,4 +25,9 @@ class Type extends Model
     {
         return $this->hasMany(Rate::class);
     }
+
+    public function guest()
+    {
+        return $this->hasMany(Guest::class, 'type_id');
+    }
 }
