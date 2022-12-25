@@ -1,8 +1,8 @@
 <div wire:ignore>
-    <nav class="flex border divide-x divide-gray-200 rounded-lg shadow isolate"
+    <nav class="isolate flex divide-x divide-gray-200 rounded-lg border shadow"
         aria-label="Tabs">
         <a href="{{ route('frontdesk.transactions', ['guestId' => $guest->id]) }}"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-900 uppercase bg-white rounded-l-lg group hover:bg-gray-50 focus:z-10"
+            class="group relative min-w-0 flex-1 overflow-hidden rounded-l-lg bg-white px-4 py-4 text-center text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:z-10"
             aria-current="page">
             <span>Transactions</span>
             <span aria-hidden="true"
@@ -15,7 +15,7 @@
         </a>
 
         <a href="{{ route('frontdesk.transactions.transfer-room', ['guest' => $guest->id]) }}"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-900 uppercase bg-white group hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+            class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
             <span>
                 Transfer Room
             </span>
@@ -31,7 +31,7 @@
         </a>
 
         <a href="{{ route('frontdesk.transactions.extend', ['guest' => $guest->id]) }}"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-900 uppercase bg-white group hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+            class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
             <span>
                 Extend
             </span>
@@ -44,7 +44,7 @@
             </span>
         </a>
         <a href="{{ route('frontdesk.transactions.amenities', ['guest' => $guest->id]) }}"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-900 uppercase bg-white group hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+            class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
             <span>
                 Amenities
             </span>
@@ -57,7 +57,7 @@
             </span>
         </a>
         <a href="{{ route('frontdesk.transactions.damages', ['guest' => $guest->id]) }}"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-900 uppercase bg-white group hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+            class="group relative min-w-0 flex-1 overflow-hidden rounded-r-lg bg-white px-4 py-4 text-center text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
             <span>
                 Damage
             </span>

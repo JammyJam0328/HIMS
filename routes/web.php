@@ -39,7 +39,7 @@ Route::get('/dashboard', function () {
             ->user()
             ->hasRole('roomboy')
     ) {
-        return 'roomboy';
+        return redirect()->route('roomboy.index');
     }
 
     if (

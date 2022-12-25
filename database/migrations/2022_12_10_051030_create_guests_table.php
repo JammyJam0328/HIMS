@@ -42,6 +42,7 @@ return new class extends Migration
             $table->integer('check_in_amount')->nullable();
             //
             $table->integer('default_deposits')->default(0);
+            $table->boolean('default_deposits_is_unclaimable')->default(false);
             $table->integer('total_deposits')->default(0);
             //
             //
@@ -57,6 +58,7 @@ return new class extends Migration
             // transfer data
             $table->bigInteger('recent_transfer_amount')->nullable();
             $table->integer('transfered_count')->default(0);
+            $table->string('check_out_step')->default('0'); 
             $table->timestamps();
         });
     }

@@ -3,11 +3,33 @@
     amountToPay: $wire.entangle('amountToPay').defer,
     givenAmount: $wire.entangle('givenAmount').defer,
     changeAmount: $wire.entangle('changeAmount').defer,
-    changeSaveToDeposit: $wire.entangle('changeSaveToDeposit').defer
+    changeSaveToDeposit: $wire.entangle('changeSaveToDeposit').defer,
+    remainingDeposit: $wire.entangle('remainingDeposit').defer,
+    additionToDeposit: $wire.entangle('additionToDeposit').defer,
+    additionToDepositChange: $wire.entangle('additionToDepositChange').defer,
+    saveAdditionToDepositChange: $wire.entangle('saveAdditionToDepositChange').defer,
+    payWithDepositHandler() {
+        let total = Number(this.additionToDeposit) + Number(this.remainingDeposit);
+
+        if (total > this.amountToPay) {
+            this.$dispatch('confirm-pay-with-deposit');
+        } else {
+            this.$dispatch('alert', {
+                type: 'error',
+                title: 'Error',
+                message: 'Deposit is not enough to pay the transaction.'
+            })
+        }
+    },
 }"
     x-init="$watch('givenAmount', value => {
         changeAmount = givenAmount > amountToPay ? givenAmount - amountToPay : 0;
-    })">
+    });
+    
+    $watch('additionToDeposit', value => {
+        let totalDeposit = Number(remainingDeposit) + Number(additionToDeposit);
+        additionToDepositChange = totalDeposit > amountToPay ? totalDeposit - amountToPay : 0;
+    });">
     <div class="grid w-full max-w-4xl p-5 mx-auto border rounded-lg shadow-sm bg-gray-50">
         <div class="flex justify-between">
             <h1 class="font-bold">
@@ -60,60 +82,107 @@
             </div>
         </div>
 
-        <div id="cashPayment"
-            x-show="paymentMethod == 'CASH'"
-            class="p-4 mt-4 bg-green-100 border border-green-300 rounded-lg">
-            <div class="grid gap-4">
-                <div class="grid gap-1">
-                    <x-input-label for="given_amount"
-                        value="Givent Amount" />
-                    <x-text-input type="text"
-                        x-model="givenAmount" />
+        <template x-if="paymentMethod == 'CASH'">
+            <div id="cashPayment"
+                class="p-4 mt-4 bg-green-100 border border-green-300 rounded-lg">
+                <div class="grid gap-4">
+                    <div class="grid gap-1">
+                        <x-input-label for="given_amount"
+                            value="Givent Amount" />
+                        <x-text-input type="text"
+                            x-model="givenAmount" />
+                    </div>
+                    <div x-cloak
+                        x-show="changeAmount > 0"
+                        class="grid gap-1"
+                        x-collapse>
+                        <x-input-label for="change"
+                            value="Change" />
+                        <x-text-input type="text"
+                            x-model="changeAmount" />
+                    </div>
+                    <div x-cloak
+                        x-show="changeAmount > 0"
+                        class="grid gap-1"
+                        x-collapse>
+                        <x-input-label for="changeSaveToDeposit"
+                            value="Save to Deposit" />
+                        <input id="changeSaveToDeposit"
+                            x-model="changeSaveToDeposit"
+                            aria-describedby="comments-description"
+                            name="changeSaveToDeposit"
+                            type="checkbox"
+                            class="w-6 h-6 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                    </div>
                 </div>
-                <div x-cloak
-                    x-show="changeAmount > 0"
-                    class="grid gap-1"
-                    x-collapse>
-                    <x-input-label for="change"
-                        value="Change" />
-                    <x-text-input type="text"
-                        x-model="changeAmount" />
-                </div>
-                <div x-cloak
-                    x-show="changeAmount > 0"
-                    class="grid gap-1"
-                    x-collapse>
-                    <x-input-label for="changeSaveToDeposit"
-                        value="Save to Deposit" />
-                    <input id="changeSaveToDeposit"
-                        x-model="changeSaveToDeposit"
-                        aria-describedby="comments-description"
-                        name="changeSaveToDeposit"
-                        type="checkbox"
-                        class="w-6 h-6 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                <div class="flex mt-4 space-x-3">
+                    <x-button href="{{ $referrerLink }}">
+                        Cancel
+                    </x-button>
+                    <x-button.primary x-on:click="$dispatch('confirm-pay-with-cash')">
+                        Save Payment
+                    </x-button.primary>
                 </div>
             </div>
-            <div class="flex mt-4 space-x-3">
-                <x-button href="{{ $referrerLink }}">
-                    Cancel
-                </x-button>
-                <x-button.primary x-on:click="$dispatch('confirm-pay-with-cash')">
-                    Save Payment
-                </x-button.primary>
+        </template>
+        <template x-if="paymentMethod == 'DEPOSIT'">
+            <div id="depositPayment"
+                class="p-4 mt-4 bg-yellow-100 border border-yellow-300 rounded-lg">
+                <div class="grid gap-4">
+                    <div class="grid gap-1">
+                        <x-input-label for="addition_to_deposit"
+                            value="Additional Amount" />
+                        <x-text-input type="text"
+                            x-model="additionToDeposit" />
+                    </div>
+                    <div x-cloak
+                        x-show="additionToDepositChange > 0"
+                        class="grid gap-1"
+                        x-collapse>
+                        <x-input-label for="change"
+                            value="Change" />
+                        <x-text-input type="number"
+                            disabled
+                            x-model="additionToDepositChange" />
+                        @error('additionToDepositChange')
+                            <x-error> {{ $message }}</x-error>
+                        @enderror
+                    </div>
+                    <div x-cloak
+                        x-show="additionToDepositChange > 0"
+                        class="grid gap-1"
+                        x-collapse>
+                        <x-input-label for="saveAdditionToDepositChange"
+                            value="Save to Deposit" />
+                        <input id="saveAdditionToDepositChange"
+                            x-model="saveAdditionToDepositChange"
+                            aria-describedby="comments-description"
+                            name="saveAdditionToDepositChange"
+                            type="checkbox"
+                            class="w-6 h-6 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                        @error('saveAdditionToDepositChange')
+                            <x-error>{{ $message }}</x-error>
+                        @enderror
+                    </div>
+                </div>
+                <div class="flex mt-4 space-x-3">
+                    <x-button href="{{ $referrerLink }}">
+                        Cancel
+                    </x-button>
+                    <x-button.primary x-on:click="payWithDepositHandler()">
+                        Save Payment
+                    </x-button.primary>
+                </div>
             </div>
-        </div>
-        <div id="depositPayment"
-            x-cloak
-            x-show="paymentMethod == 'DEPOSIT'"
-            class="p-4 mt-4 bg-yellow-100 border border-yellow-300 rounded-lg">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, nulla similique. Dolorum sapiente
-            suscipit rerum? Facilis, nostrum magnam molestiae ratione sapiente corporis eius similique id corrupti
-            expedita mollitia dignissimos! Est.
-        </div>
+        </template>
     </div>
 
     <x-confirm name="pay-with-cash"
         title="Confirm"
         message="Are you sure you want to pay with cash?"
         onConfirm="payWithCash()" />
+    <x-confirm name="pay-with-deposit"
+        title="Confirm"
+        message="Are you sure you want to pay with deposit?"
+        onConfirm="payWithDeposit()" />
 </div>

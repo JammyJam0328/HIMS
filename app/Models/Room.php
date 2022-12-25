@@ -77,4 +77,5 @@ class Room extends Model
     {
         return str_replace('_', ' ', $this->status);
     }
+
 }
