@@ -4,39 +4,39 @@
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
     <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
       <!--
-                                                                                                                                        Off-canvas menu backdrop, show/hide based on off-canvas menu state.
-                                                                                                                                  
-                                                                                                                                        Entering: "transition-opacity ease-linear duration-300"
-                                                                                                                                          From: "opacity-0"
-                                                                                                                                          To: "opacity-100"
-                                                                                                                                        Leaving: "transition-opacity ease-linear duration-300"
-                                                                                                                                          From: "opacity-100"
-                                                                                                                                          To: "opacity-0"
-                                                                                                                                      -->
+                                                                                                                                                                                                                                        Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                        Entering: "transition-opacity ease-linear duration-300"
+                                                                                                                                                                                                                                          From: "opacity-0"
+                                                                                                                                                                                                                                          To: "opacity-100"
+                                                                                                                                                                                                                                        Leaving: "transition-opacity ease-linear duration-300"
+                                                                                                                                                                                                                                          From: "opacity-100"
+                                                                                                                                                                                                                                          To: "opacity-0"
+                                                                                                                                                                                                                                      -->
       <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
 
       <div class="fixed inset-0 z-40 flex">
         <!--
-                                                                                                                                          Off-canvas menu, show/hide based on off-canvas menu state.
-                                                                                                                                  
-                                                                                                                                          Entering: "transition ease-in-out duration-300 transform"
-                                                                                                                                            From: "-translate-x-full"
-                                                                                                                                            To: "translate-x-0"
-                                                                                                                                          Leaving: "transition ease-in-out duration-300 transform"
-                                                                                                                                            From: "translate-x-0"
-                                                                                                                                            To: "-translate-x-full"
-                                                                                                                                        -->
+                                                                                                                                                                                                                                          Off-canvas menu, show/hide based on off-canvas menu state.
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                          Entering: "transition ease-in-out duration-300 transform"
+                                                                                                                                                                                                                                            From: "-translate-x-full"
+                                                                                                                                                                                                                                            To: "translate-x-0"
+                                                                                                                                                                                                                                          Leaving: "transition ease-in-out duration-300 transform"
+                                                                                                                                                                                                                                            From: "translate-x-0"
+                                                                                                                                                                                                                                            To: "-translate-x-full"
+                                                                                                                                                                                                                                        -->
         <div class="relative flex w-full max-w-xs flex-1 flex-col bg-white pt-5 pb-4">
           <!--
-                                                                                                                                            Close button, show/hide based on off-canvas menu state.
-                                                                                                                                  
-                                                                                                                                            Entering: "ease-in-out duration-300"
-                                                                                                                                              From: "opacity-0"
-                                                                                                                                              To: "opacity-100"
-                                                                                                                                            Leaving: "ease-in-out duration-300"
-                                                                                                                                              From: "opacity-100"
-                                                                                                                                              To: "opacity-0"
-                                                                                                                                          -->
+                                                                                                                                                                                                                                            Close button, show/hide based on off-canvas menu state.
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                            Entering: "ease-in-out duration-300"
+                                                                                                                                                                                                                                              From: "opacity-0"
+                                                                                                                                                                                                                                              To: "opacity-100"
+                                                                                                                                                                                                                                            Leaving: "ease-in-out duration-300"
+                                                                                                                                                                                                                                              From: "opacity-100"
+                                                                                                                                                                                                                                              To: "opacity-0"
+                                                                                                                                                                                                                                          -->
           <div class="absolute top-0 right-0 -mr-12 pt-2">
             <button type="button"
               class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -61,10 +61,10 @@
                   class="bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
                   aria-current="page">
                   <!--
-                                                                                                                                                    Heroicon name: outline/home
-                                                                                                                                  
-                                                                                                                                                    Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500"
-                                                                                                                                                  -->
+                                                                                                                                                                                                                                                    Heroicon name: outline/home
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                    Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500"
+                                                                                                                                                                                                                                                  -->
                   <svg class="text-gray-500 mr-3 flex-shrink-0 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -138,16 +138,17 @@
     <!-- Static sidebar for desktop -->
     <div
       class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4">
-      <div class="flex flex-shrink-0 items-center px-6">
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=purple&shade=500" alt="Your Company">
+      <div class="flex flex-shrink-0 items-center bg-gren-400 px-3 space-x-1">
+        <h1 class="text-2xl font-bold pr-1 border-r-2 border-green-500  text-center text-green-700">HIMS</h1>
+        <span class="leading-3 text-sm font-medium text-gray-600"> {{ auth()->user()->branch_name ?? '' }}</span>
       </div>
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="mt-5 flex h-0 flex-1 flex-col overflow-y-auto pt-1">
         <!-- User account dropdown -->
-        <div class="relative inline-block px-3 text-left">
+        <div class="relative inline-block px-3 text-left" x-data="{ dropdown: false }">
           <div>
-            <button type="button"
-              class="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-100"
+            <button type="button" x-on:click="dropdown = !dropdown" x-on:click.away="dropdown = false"
+              class="group w-full rounded-md bg-white px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-100"
               id="options-menu-button" aria-expanded="false" aria-haspopup="true">
               <span class="flex w-full items-center justify-between">
                 <span class="flex min-w-0 items-center justify-between space-x-3">
@@ -175,16 +176,20 @@
           </div>
 
           <!--
-                                                                                                                                            Dropdown menu, show/hide based on menu state.
-                                                                                                                                  
-                                                                                                                                            Entering: "transition ease-out duration-100"
-                                                                                                                                              From: "transform opacity-0 scale-95"
-                                                                                                                                              To: "transform opacity-100 scale-100"
-                                                                                                                                            Leaving: "transition ease-in duration-75"
-                                                                                                                                              From: "transform opacity-100 scale-100"
-                                                                                                                                              To: "transform opacity-0 scale-95"
-                                                                                                                                          -->
-          {{-- <div
+                                                                                                                                                                                                                                            Dropdown menu, show/hide based on menu state.
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                            Entering: "transition ease-out duration-100"
+                                                                                                                                                                                                                                              From: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                              To: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                            Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                                                                              From: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                              To: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                          -->
+          <div x-show="dropdown" x-cloak x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
             class="absolute right-0 left-0 z-10 mx-3 mt-1 origin-top divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu" aria-orientation="vertical" aria-labelledby="options-menu-button" tabindex="-1">
             <div class="py-1" role="none">
@@ -197,16 +202,23 @@
                 id="options-menu-item-2">Notifications</a>
             </div>
             <div class="py-1" role="none">
-              <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                id="options-menu-item-3">Get desktop app</a>
-              <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                id="options-menu-item-4">Support</a>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                        this.closest('form').submit();"
+                  class="text-gray-700 hover:text-green-700 px-4 py-2 flex items-center space-x-1 text-sm"
+                  role="menuitem" tabindex="-1" id="options-menu-item-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                  </svg>
+                  <span>Logout</span>
+                </a>
+              </form>
             </div>
-            <div class="py-1" role="none">
-              <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                id="options-menu-item-5">Logout</a>
-            </div>
-          </div> --}}
+          </div>
         </div>
         <!-- Sidebar Search -->
         {{-- <div class="mt-5 px-3">
@@ -255,13 +267,13 @@
             <a href="#"
               class="text-gray-700 hover:text-gray-900 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
               <!-- Heroicon name: outline/clock -->
-              <svg class="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="mr-3 flex-shrink-0 h-6 w-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
-              Recent
+
+              Reports
             </a>
           </div>
           {{-- <div class="mt-8">
@@ -339,15 +351,15 @@
               </div>
 
               <!--
-                                                                                                                                                Dropdown menu, show/hide based on menu state.
-                                                                                                                                  
-                                                                                                                                                Entering: "transition ease-out duration-100"
-                                                                                                                                                  From: "transform opacity-0 scale-95"
-                                                                                                                                                  To: "transform opacity-100 scale-100"
-                                                                                                                                                Leaving: "transition ease-in duration-75"
-                                                                                                                                                  From: "transform opacity-100 scale-100"
-                                                                                                                                                  To: "transform opacity-0 scale-95"
-                                                                                                                                              -->
+                                                                                                                                                                                                                                                Dropdown menu, show/hide based on menu state.
+                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                Entering: "transition ease-out duration-100"
+                                                                                                                                                                                                                                                  From: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                                  To: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                                Leaving: "transition ease-in duration-75"
+                                                                                                                                                                                                                                                  From: "transform opacity-100 scale-100"
+                                                                                                                                                                                                                                                  To: "transform opacity-0 scale-95"
+                                                                                                                                                                                                                                              -->
               <div
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
@@ -379,7 +391,7 @@
         <!-- Page title & actions -->
         <div class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <div class="min-w-0 flex-1">
-            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">{{ auth()->user()->branch->name }}</h1>
+            <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">{{ auth()->user()->branch_name }}</h1>
           </div>
           <div class="mt-4 flex sm:mt-0 sm:ml-4">
             <button type="button"
@@ -388,7 +400,7 @@
         </div>
 
         <!-- Container for the main content -->
-        <div class="mx-auto max-w-7xl py-10">
+        <div class="mx-auto max-w-7xl py-10 lg:px-10">
           {{ $slot }}
         </div>
 
