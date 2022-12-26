@@ -16,7 +16,7 @@
                         name="number" />
                 </div>
                 @error('asdiscountset.name')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="discount.amount"
@@ -29,7 +29,7 @@
                         name="amount" />
                 </div>
                 @error('discount.amount')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="discount.is_percentage"
@@ -44,7 +44,7 @@
                     </x-select>
                 </div>
                 @error('discount.is_percentage')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="discount.is_available"
@@ -59,7 +59,7 @@
                     </x-select>
                 </div>
                 @error('discount.is_available')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
         </div>

@@ -1,4 +1,4 @@
-<div class="flex justify-center max-w-4xl p-5 mx-auto border rounded-lg shadow-sm bg-gray-50">
+<div class="mx-auto flex max-w-4xl justify-center rounded-lg border bg-gray-50 p-5 shadow-sm">
     <form wire:submit.prevent="store"
         class="grid w-full">
         @csrf
@@ -16,7 +16,7 @@
                         name="number" />
                 </div>
                 @error('extensionRate.hour')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="extensionRate.amount"
@@ -29,11 +29,11 @@
                         name="amount" />
                 </div>
                 @error('extensionRate.amount')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
         </div>
-        <div class="flex mt-5 space-x-3">
+        <div class="mt-5 flex space-x-3">
             <x-button href="{{ route('admin.extension-rates') }}">Return</x-button>
             <x-button.primary type="submit">Save</x-button.primary>
         </div>

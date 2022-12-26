@@ -27,7 +27,7 @@
                     </x-select>
                 </div>
                 @error('rate.staying_hour_id')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="rate.type_id"
@@ -51,7 +51,7 @@
                     </x-select>
                 </div>
                 @error('rate.type_id')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
 
@@ -65,7 +65,7 @@
                         id="number" />
                 </div>
                 @error('rate.amount')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div class="flex space-x-3">

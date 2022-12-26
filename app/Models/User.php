@@ -17,6 +17,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Branch::class);
     }
+    
+    public function roomBoyFloor()
+    {
+        return $this->belongsTo(Floor::class,'room_boy_assigned_floor_id');
+    }
+
+    public function roomBoyRoom()
+    {
+        return $this->belongsTo(Room::class,'room_boy_cleaning_room_id');
+    }
 
     /**
      * The attributes that are mass assignable.

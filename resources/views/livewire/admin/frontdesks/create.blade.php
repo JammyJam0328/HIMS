@@ -1,4 +1,4 @@
-<div class="flex justify-center max-w-4xl p-5 mx-auto border rounded-lg shadow-sm bg-gray-50">
+<div class="mx-auto flex max-w-4xl justify-center rounded-lg border bg-gray-50 p-5 shadow-sm">
     <form wire:submit.prevent="store"
         class="flex w-full">
         @csrf
@@ -16,7 +16,7 @@
                         id="name" />
                 </div>
                 @error('frontdesk.name')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="frontdesk.contact_number"
@@ -29,7 +29,7 @@
                         id="contact_number" />
                 </div>
                 @error('frontdesk.contact_number')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="frontdesk.email"
@@ -42,7 +42,7 @@
                         name="email" />
                 </div>
                 @error('frontdesk.email')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div class="flex space-x-3">

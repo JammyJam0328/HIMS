@@ -1,4 +1,4 @@
-<div class="flex justify-center max-w-4xl p-5 mx-auto border rounded-lg shadow-sm bg-gray-50">
+<div class="mx-auto flex max-w-4xl justify-center rounded-lg border bg-gray-50 p-5 shadow-sm">
     <form wire:submit.prevent="store"
         class="flex w-full">
         @csrf
@@ -15,7 +15,7 @@
                         name="number" />
                 </div>
                 @error('floor.number')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div class="flex space-x-3">

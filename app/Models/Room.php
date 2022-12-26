@@ -78,4 +78,10 @@ class Room extends Model
         return str_replace('_', ' ', $this->status);
     }
 
+
+    public function user()
+    {
+        return $this->belongsTo(user::class,'room_boy_cleaning_room_id');
+    }
+
 }

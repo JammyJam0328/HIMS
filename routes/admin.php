@@ -154,4 +154,28 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/menus', function () {
         return view('v1.admin.menus.index');
     })->name('admin.menus');
+
+    // cleaners
+
+    Route::get('/cleaners', function () {
+        return view('v1.admin.cleaners.index');
+    })->name('admin.cleaners');
+
+    // users
+
+    Route::get('/roomboys', function () {
+        return view('v1.admin.roomboys.index');
+    })->name('admin.roomboys');
+
+    Route::get('/roomboys/create', function () {
+        return view('v1.admin.roomboys.create');
+    })->name('admin.roomboys.create');
+
+    Route::get('/roomboys/{roomboy}/edit', function ($roomboy) {
+        return view('v1.admin.roomboys.edit',[
+            'roomboy' => $roomboy,
+        ]);
+    })->name('admin.roomboys.edit');
+
+
 });

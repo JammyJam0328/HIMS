@@ -16,7 +16,7 @@
                         id="number" />
                 </div>
                 @error('room.number')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
 
@@ -41,7 +41,7 @@
                     </x-select>
                 </div>
                 @error('room.floor_id')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
 
@@ -66,7 +66,7 @@
                     </x-select>
                 </div>
                 @error('room.status')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
 
@@ -91,7 +91,7 @@
                     </x-select>
                 </div>
                 @error('room.type_id')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
 
