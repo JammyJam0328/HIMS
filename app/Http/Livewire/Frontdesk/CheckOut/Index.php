@@ -111,6 +111,12 @@ class Index extends Component
 
            DB::commit();
 
+           $this->dispatchBrowserEvent('alert', [
+               'type' => 'success',
+               'title' => 'Guest checked out',
+               'message' => 'Guest has been checked out',
+           ]);
+
            $this->guest = null;
 
            $this->search = '';

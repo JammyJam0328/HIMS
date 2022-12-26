@@ -5,6 +5,17 @@
                 <x-text-input wire:model.debounce.500ms="search"
                     type="search"
                     placeholder="Search" />
+                <div class="flex items-center space-x-1">
+                    <span class="text-gray-700">
+                        Floor :
+                    </span>
+                    <x-select wire:model="filterFloor">
+                        <option value="">All</option>
+                        @foreach ($floors as $floor)
+                            <option value="{{ $floor->id }}">{{ $floor->numberWithFormat() }}</option>
+                        @endforeach
+                    </x-select>
+                </div>
             </x-slot:left>
             <x-slot:right>
                 <x-button.primary href="{{ route('admin.roomboys.create') }}">

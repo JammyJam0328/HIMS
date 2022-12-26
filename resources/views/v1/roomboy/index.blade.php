@@ -50,11 +50,9 @@
 
         <main class="-mt-32">
             <div class="px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <!-- Replace with your content -->
-                <div class="px-5 py-6 bg-white rounded-lg shadow sm:px-6">
-                    <div class="border-4 border-gray-200 border-dashed rounded-lg h-96"></div>
+                <div class="w-full px-5 py-6 bg-white rounded-lg shadow sm:px-6">
+                    @livewire('roomboy.index')
                 </div>
-                <!-- /End replace -->
             </div>
         </main>
     </div>
