@@ -4,5 +4,5 @@
     <div class="h-screen bg-gray-700">
         @livewire('kiosk.check-in')
     </div>
-    </x-my-alert> />
+    </x-my-alert />
 @endsection
