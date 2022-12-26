@@ -16,7 +16,7 @@
                         name="number" />
                 </div>
                 @error('amenity.name')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div wire:key="amenity.amount"
@@ -29,7 +29,7 @@
                         name="amount" />
                 </div>
                 @error('amenity.amount')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div class="flex space-x-3">

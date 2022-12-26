@@ -15,7 +15,7 @@
                         id="name" />
                 </div>
                 @error('type.name')
-                    <x-error>{{ $message }}</x-error>
+                    <x-my-error>{{ $message }}</x-my-error>
                 @enderror
             </div>
             <div class="flex space-x-3">

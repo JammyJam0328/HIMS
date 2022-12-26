@@ -25,4 +25,9 @@ class Floor extends Model
             return $this->number.$ends[$this->number % 10].' Floor';
         }
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'room_boy_assigned_floor_id');
+    }
 }

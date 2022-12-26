@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class RequestAmenity extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

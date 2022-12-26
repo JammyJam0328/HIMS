@@ -1,13 +1,18 @@
-<div x-data="{ totalAmountToPay: $wire.entangle('totalAmountToPay').defer, changeAmount: $wire.entangle('changeAmount').defer, givenAmount: $wire.entangle('givenAmount').defer }"
+<div x-data="{
+    totalAmountToPay: $wire.entangle('totalAmountToPay').defer,
+    changeAmount: $wire.entangle('changeAmount').defer,
+    givenAmount: $wire.entangle('givenAmount').defer,
+    changeSaveToDeposit: $wire.entangle('changeSaveToDeposit').defer
+}"
     x-init="$watch('givenAmount', value => {
         changeAmount = givenAmount > totalAmountToPay ? givenAmount - totalAmountToPay : 0;
     })"
-    class="grid max-w-4xl gap-5 p-5 mx-auto border rounded-lg shadow-sm bg-gray-50">
+    class="mx-auto grid max-w-4xl gap-5 rounded-lg border bg-gray-50 p-5 shadow-sm">
     <div class="overflow-hidden bg-blue-100 sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900">Guest Check In Information</h3>
         </div>
-        <div class="px-4 py-5 border-t border-blue-200 sm:p-0">
+        <div class="border-t border-blue-200 px-4 py-5 sm:p-0">
             <dl class="sm:divide-y sm:divide-blue-200">
                 <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">Name</dt>
@@ -52,7 +57,7 @@
                 Payment
             </h3>
         </div>
-        <div class="px-4 py-5 border-t border-green-200 sm:p-0">
+        <div class="border-t border-green-200 px-4 py-5 sm:p-0">
             <dl class="sm:divide-y sm:divide-green-200">
                 <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
@@ -83,22 +88,61 @@
                         GIVEN AMOUNT
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        <x-text-input type="number"
-                            name="given_amount"
-                            x-model="givenAmount" />
+                        <div>
+                            <x-text-input type="number"
+                                name="given_amount"
+                                x-model="givenAmount" />
+                        </div>
+                        @error('givenAmount')
+                            <x-my-error>{{ $message }}</x-my-error>
+                        @enderror
                     </dd>
                 </div>
-                <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3 sm:px-6">
+                <div x-cloak
+                    x-show="changeAmount > 0"
+                    class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3 sm:px-6"
+                    x-collapse>
                     <dt class="text-sm font-medium text-gray-500">
                         CHANGE
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        <x-text-input type="number"
-                            name="given_amount"
-                            x-model="changeAmount" />
+                        <div>
+                            <x-text-input type="number"
+                                name="given_amount"
+                                x-model="changeAmount" />
+                        </div>
+                        @error('changeAmount')
+                            <x-my-error>{{ $message }}</x-my-error>
+                        @enderror
+                    </dd>
+                </div>
+                <div x-cloak
+                    x-show="changeAmount > 0"
+                    class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3 sm:px-6"
+                    x-collapse>
+                    <dt class="text-sm font-medium text-gray-500">
+                        Save change to deposit
+                    </dt>
+                    <dd class="my-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                        <input id="changeSaveToDeposit"
+                            x-model="changeSaveToDeposit"
+                            aria-describedby="comments-description"
+                            name="changeSaveToDeposit"
+                            type="checkbox"
+                            class="h-6 w-6 rounded border-gray-300 text-green-600 focus:ring-green-500">
                     </dd>
                 </div>
             </dl>
         </div>
     </div>
+    <div class="flex w-full">
+        <x-button.primary x-on:click="$dispatch('confirm-check-in')"
+            class="w-full justify-center">
+            <span class="text-xl">Check In</span>
+        </x-button.primary>
+    </div>
+    <x-confirm name="check-in"
+        title="Confirm"
+        message="Are you sure you want to check in this guest ?"
+        onConfirm="checkIn()" />
 </div>

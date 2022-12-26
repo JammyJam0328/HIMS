@@ -26,7 +26,7 @@
                             autofocus />
                     </div>
                     @error('name')
-                        <x-error>{{ $message }}</x-error>
+                        <x-my-error>{{ $message }}</x-my-error>
                     @enderror
                 </div>
                 <div wire:key="form.number"
@@ -45,7 +45,7 @@
                             autofocus />
                     </div>
                     @error('contact_number')
-                        <x-error>{{ $message }}</x-error>
+                        <x-my-error>{{ $message }}</x-my-error>
                     @enderror
                 </div>
             </div>

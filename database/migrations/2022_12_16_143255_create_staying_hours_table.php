@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('staying_hours', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('branch_id');
-            $table->string('number');
+            $table->bigInteger('number');
             $table->timestamps();
         });
     }
