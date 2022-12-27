@@ -70,6 +70,16 @@ class BranchSeeder extends Seeder
 
         $kitchen->assignRole('kitchen');
 
+        $back_office = User::create([
+            'name' => 'ALMA Back Office',
+            'email' => 'almaback-office@gmail.com',
+            'password' => bcrypt('password'),
+            'branch_id' => $branch->id,
+            'branch_name' => $branch->name,
+        ]);
+
+        $back_office->assignRole('back_office');
+
         $roomboy = User::create([
             'name' => 'ALMA Roomboy',
             'email' => 'almaroomboy@gmail.com',

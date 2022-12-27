@@ -57,6 +57,14 @@ Route::get('/dashboard', function () {
     ) {
         return redirect()->route('kiosk.index');
     }
+
+    if (
+        auth()
+            ->user()
+            ->hasRole('back_office')
+    ) {
+        return redirect()->route('back-office.index');
+    }
 })
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
