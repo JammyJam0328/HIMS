@@ -24,8 +24,12 @@ return new class extends Migration
             $table->dateTime('last_checkin_at')->nullable();
             $table->dateTime('last_checkout_at')->nullable();
             $table->dateTime('time_to_terminate_in_queue')->nullable();
-            $table->dateTime('time_to_clean')->nullable();
             $table->dateTime('check_out_time')->nullable();
+
+
+
+            $table->dateTime('time_to_clean')->nullable();
+            $table->dateTime('started_cleaning_at')->nullable();
             $table->timestamps();
         });
     }

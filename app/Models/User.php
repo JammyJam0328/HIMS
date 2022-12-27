@@ -40,6 +40,8 @@ class User extends Authenticatable
         'password',
         'last_transaction_at',
         'branch_name',
+        'room_boy_cleaning_room_id',
+        'room_boy_assigned_floor_id'
     ];
 
     /**

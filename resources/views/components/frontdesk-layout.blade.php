@@ -274,7 +274,7 @@
                     </div>
                     <div class="flex mt-4 space-x-3 sm:mt-0 sm:ml-4">
                         <x-button>Settings</x-button>
-                        <x-log-out />
+                        <x-button.dark href="{{ route('frontdesk.end-shift') }}">End Shift</x-button.dark>
                     </div>
                 </div>
                 <div class="p-8 mb-10">

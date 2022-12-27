@@ -64,4 +64,5 @@
             </x-slot:footer>
         </x-table>
     </x-content>
+
 </div>

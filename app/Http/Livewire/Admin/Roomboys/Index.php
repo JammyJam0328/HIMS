@@ -21,6 +21,8 @@ class Index extends Component
         $this->floors = auth()->user()->branch->floors;
     }
 
+  
+
     public function render()
     {
         return view('livewire.admin.roomboys.index',[
