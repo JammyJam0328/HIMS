@@ -23,7 +23,7 @@ return new class extends Migration
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->integer('cleaning_duration');
-
+            $table->boolean('delayed_cleaning')->default(false);
             $table->timestamps();
         });
     }

@@ -102,4 +102,7 @@ Route::prefix('frontdesk')->middleware(['auth', 'role:frontdesk'])->group(functi
 
         return view('v1.frontdesk.shifting');
     })->name('frontdesk.shifting');
+
+
+    Route::get('/end-shift', [\App\Http\Controllers\EndShiftController::class,'index'])->name('frontdesk.end-shift');
 });

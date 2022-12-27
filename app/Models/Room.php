@@ -81,7 +81,7 @@ class Room extends Model
 
     public function user()
     {
-        return $this->belongsTo(user::class,'room_boy_cleaning_room_id');
+        return $this->belongsTo(User::class,'room_boy_cleaning_room_id');
     }
 
 }
