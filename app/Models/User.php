@@ -41,7 +41,8 @@ class User extends Authenticatable
         'last_transaction_at',
         'branch_name',
         'room_boy_cleaning_room_id',
-        'room_boy_assigned_floor_id'
+        'room_boy_assigned_floor_id',
+        'selected_room_ids'
     ];
 
     /**

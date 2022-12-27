@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Kiosk;
 
+use App\Events\KioskEvent;
 use App\Jobs\ProcessTerminatedGuest;
 use App\Models\Guest;
+use App\Models\KioskTemporaryStorage;
 use App\Models\Rate;
 use App\Models\Room;
 use App\Models\Type;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use App\Models\User;
 
 class CheckIn extends Component
 {
@@ -55,7 +58,18 @@ class CheckIn extends Component
 
     public $roomRate;
 
+    public $otherKioskIds = [];
+
     public $generatedQrCode = '';
+
+    public function getListeners()
+    {
+        $authId = auth()->user()->id;
+
+        return [
+            "echo-private:selectroom.".$authId.",KioskEvent" => 'reloadRooms',
+        ];
+    }
 
     public function getTypes()
     {
@@ -65,13 +79,34 @@ class CheckIn extends Component
         })->get();
     }
 
+    public function reloadRooms()
+    {
+       if ($this->typeId) {
+         $kioskTemporaryStorages = KioskTemporaryStorage::whereBranchId(auth()->user()->branch_id)->get()->pluck('room_id')->toArray();
+            $this->rooms = Room::whereTypeId($this->typeId)
+                            ->whereStatus(Room::AVAILABLE)
+                            ->whereIsPriority(true)
+                            ->whereNotIn('id', $kioskTemporaryStorages)
+                            ->with(['type.rates'])
+                            ->orderBy('number', 'asc')
+                            ->get()
+                            ->take(10);
+            $this->rates = Rate::whereBranchId(auth()->user()->branch_id)
+                            ->whereTypeId($this->typeId)
+                            ->with(['stayingHour'])
+                            ->get();
+        }
+        
+    }
+
     public function getRooms($typeId)
     {
         $this->typeId = $typeId;
+        $kioskTemporaryStorages = KioskTemporaryStorage::whereBranchId(auth()->user()->branch_id)->get()->pluck('room_id')->toArray();
         $this->rooms = Room::whereTypeId($this->typeId)
                         ->whereStatus(Room::AVAILABLE)
                         ->whereIsPriority(true)
-                        ->whereNotIn('id', $this->roomSelectedByOthers)
+                        ->whereNotIn('id', $kioskTemporaryStorages)
                         ->with(['type.rates'])
                         ->orderBy('number', 'asc')
                         ->get()
@@ -80,11 +115,36 @@ class CheckIn extends Component
                         ->whereTypeId($this->typeId)
                         ->with(['stayingHour'])
                         ->get();
+        
     }
 
     public function getRates($roomId, $floorId)
     {
+        foreach($this->otherKioskIds as $otherKioskId) {
+            KioskEvent::dispatch($otherKioskId->id);
+        }
+
+        DB::beginTransaction();
         $room = Room::find($roomId);
+        KioskTemporaryStorage::whereUserId(auth()->user()->id)->delete();
+        $alreadySelectedRoom = KioskTemporaryStorage::whereRoomId($roomId)->first();
+        if ($alreadySelectedRoom) {
+            $this->step = 2;
+            $this->dispatch('alert',[
+                'type' => 'error',
+                'title' => 'Failed',
+                'message' => 'Room already selected by another kiosk'
+            ]);
+            return;
+        }
+
+        KioskTemporaryStorage::create([
+            'branch_id' => auth()->user()->branch_id,
+            'user_id' => auth()->user()->id,
+            'room_id' => $roomId,
+        ]);
+
+        DB::commit();
         $this->roomNumber = $room->number;
         $this->floorId = $floorId;
         $this->roomId = $roomId;
@@ -108,6 +168,17 @@ class CheckIn extends Component
 
     public function mount()
     {
+        $temporaryStorage = KioskTemporaryStorage::whereUserId(auth()->user()->id)->first();
+        if ($temporaryStorage) {
+            $temporaryStorage->delete();
+        }
+
+
+        $this->otherKioskIds = User::whereBranchId(auth()->user()->branch_id)
+            ->role('kiosk')
+            ->where('id', '!=', auth()->user()->id)
+            ->get('id');
+
         $this->getTypes();
 
         $this->step = 1;
@@ -164,6 +235,9 @@ class CheckIn extends Component
         //
         $this->step = 5;
         ProcessTerminatedGuest::dispatch($guest->id)->delay(now()->addHours(2));
+
+        KioskTemporaryStorage::whereUserId(auth()->user()->id)->delete();
+
         DB::commit();
     }
 
