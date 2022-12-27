@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>KITCHEN | HOTEL</title>
+  <title>KIOSK | HOTEL</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,12 +24,20 @@
 
 </head>
 
-<body class="font-rubik antialiased">
-  @yield('content')
+<body class="font-rubik antialiased bg-gray-600">
+  <div class="fixed inset-0 bg-gradient-to-t from-transparent to-gray-600 w-full h-full overflow-hidden">
+    <img src="{{ asset('images/hotel-bg.jpg') }}" class="object-cover opacity-20" alt="">
+  </div>
 
-  <x-my-alert />
-  @stack('scripts')
-  @livewireScripts
+  <div
+    class="absolute text-gray-300 flex justify-end items-end pb-5 pr-10 text-sm font-rubik font-medium w-full h-full">
+    POWERED BY: J7 I.T SOLUTION & SERVICES</div>
+  <div class="relative">
+    @yield('content')
+
+    <x-my-alert />
+    @stack('scripts')
+    @livewireScripts
 
 </body>
 
