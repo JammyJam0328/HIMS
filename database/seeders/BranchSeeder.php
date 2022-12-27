@@ -50,6 +50,16 @@ class BranchSeeder extends Seeder
 
         $kiosk->assignRole('kiosk');
 
+        $kiosk = User::create([
+            'name' => 'ALMA Kiosk 2',
+            'email' => 'almakios2k@gmail.com',
+            'password' => bcrypt('password'),
+            'branch_id' => $branch->id,
+            'branch_name' => $branch->name,
+        ]);
+
+        $kiosk->assignRole('kiosk');
+
         $kitchen = User::create([
             'name' => 'ALMA Kitchen',
             'email' => 'almakitchen@gmail.com',

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('last_transaction_at')->nullable();
             $table->string('branch_name')->nullable();
 
+
             // roomboy
             $table->unsignedBigInteger('room_boy_assigned_floor_id')->nullable(); // only applicable with user with role roomboy
             $table->unsignedBigInteger('room_boy_cleaning_room_id')->nullable(); // only applicable with user with role roomboy
