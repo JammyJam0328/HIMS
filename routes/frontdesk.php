@@ -88,6 +88,11 @@ Route::prefix('frontdesk')->middleware(['auth', 'role:frontdesk', 'has_frontend'
     Route::get('/room-monitoring', function () {
         return view('v1.frontdesk.room-monitoring');
     })->name('frontdesk.room-monitoring');
+
+
+    Route::get('/kitchen', function () {
+        return view('v1.frontdesk.kitchen');
+    })->name('frontdesk.kitchen');
 });
 
 Route::prefix('frontdesk')->middleware(['auth', 'role:frontdesk'])->group(function () {
