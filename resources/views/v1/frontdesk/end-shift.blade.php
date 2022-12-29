@@ -16,8 +16,8 @@
             document.body.innerHTML = originalContents;
         }
     }">
-        <div class="flex items-center p-10 space-x-3">
-           @livewire('frontdesk.endshift')
+        <div class="flex items-center space-x-3 p-10">
+            @livewire('frontdesk.endshift')
             <x-button.primary x-on:click="printDiv('reports')">Print</x-button.primary>
         </div>
         <div id="reports"
@@ -28,17 +28,17 @@
                 </h1>
             </div>
             <div class="mt-10">
-                <table class="w-full text-sm uppercase border border-black table-auto">
+                <table class="w-full table-auto border border-black text-sm uppercase">
                     <tbody>
                         <tr>
-                            <td class="px-10 py-2 text-gray-600 border border-black w-60">DATE</td>
-                            <td class="px-10 py-2 border border-black">
+                            <td class="w-60 border border-black px-10 py-2 text-gray-600">DATE</td>
+                            <td class="border border-black px-10 py-2">
                                 {{ now()->format('l F d, Y') }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-10 py-2 text-gray-600 border border-black w-60">Front Desk</td>
-                            <td class="px-10 py-2 border border-black">
+                            <td class="w-60 border border-black px-10 py-2 text-gray-600">Front Desk</td>
+                            <td class="border border-black px-10 py-2">
                                 @foreach ($frontdesks as $frontdesk)
                                     <span class="font-semibold"> {{ $frontdesk->employee->name }}</span>
                                     @if (!$loop->last)
@@ -48,20 +48,20 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-10 py-2 text-gray-600 border border-black w-60">Shift</td>
-                            <td class="px-10 py-2 border border-black">
+                            <td class="w-60 border border-black px-10 py-2 text-gray-600">Shift</td>
+                            <td class="border border-black px-10 py-2">
                                 {{ \Carbon\Carbon::parse($frontdesks->first()->time_in)->format('A') }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-10 py-2 text-gray-600 border border-black w-60">Time Logged In</td>
-                            <td class="px-10 py-2 border border-black">
+                            <td class="w-60 border border-black px-10 py-2 text-gray-600">Time Logged In</td>
+                            <td class="border border-black px-10 py-2">
                                 {{ \Carbon\Carbon::parse($frontdesks->first()->time_in)->format('h:i:s A') }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-10 py-2 text-gray-600 border border-black w-60">Time Logged Out</td>
-                            <td class="px-10 py-2 border border-black">
+                            <td class="w-60 border border-black px-10 py-2 text-gray-600">Time Logged Out</td>
+                            <td class="border border-black px-10 py-2">
                                 {{ \Carbon\Carbon::parse($frontdesks->first()->time_out)->format('h:i:s A') }}
                             </td>
                         </tr>
@@ -69,8 +69,8 @@
                 </table>
             </div>
             <div class="mt-10">
-                <table class="w-full text-sm uppercase border border-black table-auto">
-                    <thead class="bg-gray-200 border-b border-black">
+                <table class="w-full table-auto border border-black text-sm uppercase">
+                    <thead class="border-b border-black bg-gray-200">
                         <th colspan="10"
                             class="py-3">
                             <span class="text-2xl font-semibold">SUMMARY</span>
@@ -111,10 +111,10 @@
                     <tbody>
                         @foreach ($floors as $floor)
                             <tr class="border border-black">
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     {{ $floor->numberWithFormat() }}
                                 </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     @php
                                         $transaction = $transactions[$floor->id] ?? 0;
                                     @endphp
@@ -125,22 +125,30 @@
                                         ₱ 00
                                     @endif
                                 </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
+                                    @php
+                                        $transaction = $transactions[$floor->id] ?? 0;
+                                    @endphp
+                                    @if ($transaction)
+                                        ₱
+                                        {{ number_format($transaction->where('type', \App\Models\Transaction::FOOD)->sum('payable_amount'), 2) }}
+                                    @else
+                                        ₱ 00
+                                    @endif
+                                </td>
+                                <td class="border border-black p-2">
                                     ₱ 00.00
                                 </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     ₱ 00.00
                                 </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     ₱ 00.00
                                 </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     ₱ 00.00
                                 </td>
-                                <td class="p-2 border border-black">
-                                    ₱ 00.00
-                                </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     ₱ 00.00
                                 </td>
                                 <td
@@ -164,7 +172,7 @@
                                         ₱ 00.00
                                     @endif
                                 </td>
-                                <td class="p-2 border border-black">
+                                <td class="border border-black p-2">
                                     @php
                                         $deposit = $deposits[$floor->id] ?? 0;
                                     @endphp
@@ -180,41 +188,41 @@
                 </table>
             </div>
             <div class="mt-10">
-                <table class="w-full text-sm uppercase border border-black table-auto">
+                <table class="w-full table-auto border border-black text-sm uppercase">
                     <tbody>
                         <tr class="bg-orange-600">
                             <td class="w-[380px] border border-black px-10 py-2">TOTAL NEW GUEST</td>
-                            <td class="px-10 py-2 pr-10 text-right border border-black">
+                            <td class="border border-black px-10 py-2 pr-10 text-right">
                                 {{ $new_guest_count }}
                             </td>
                         </tr>
                         <tr class="bg-yellow-400">
                             <td class="w-[380px] border border-black px-10 py-2">TOTAL EXTENDED GUEST</td>
-                            <td class="px-10 py-2 pr-10 text-right border border-black">
+                            <td class="border border-black px-10 py-2 pr-10 text-right">
                                 {{ $unique_extensions_today_count }}
                             </td>
                         </tr>
                         <tr class="bg-green-400">
                             <td class="w-[380px] border border-black px-10 py-2">TOTAL # OF ORDER SLIP</td>
-                            <td class="px-10 py-2 pr-10 text-right border border-black">
+                            <td class="border border-black px-10 py-2 pr-10 text-right">
                                 0
                             </td>
                         </tr>
                         <tr class="bg-pink-300">
                             <td class="w-[380px] border border-black px-10 py-2">TOTAL # OF UNOCCUPIED ROOM</td>
-                            <td class="px-10 py-2 pr-10 text-right border border-black">
+                            <td class="border border-black px-10 py-2 pr-10 text-right">
                                 {{ count($unoccupied_rooms) }}
                             </td>
                         </tr>
                         <tr class="">
                             <td colspan="2"
-                                class="px-10 py-2 pr-10 text-right border border-black">
+                                class="border border-black px-10 py-2 pr-10 text-right">
                                 UNOCCUPIED ROOMS:
                             </td>
                         </tr>
                         <tr class="">
                             <td colspan="2"
-                                class="px-10 py-2 pr-10 text-right border border-black">
+                                class="border border-black px-10 py-2 pr-10 text-right">
                                 @foreach ($unoccupied_rooms as $rooms)
                                     {{ $rooms->number }}
                                     @if (!$loop->last)
