@@ -14,9 +14,11 @@ class DevSeeder extends Seeder
      */
     public function run()
     {
-        Employee::factory()->count(10)->create([
-            'branch_id' => 1,
-            'type' => Employee::FRONTDESK,
-        ]);
+        if (app()->environment('local')) {
+            Employee::factory()->count(10)->create([
+                'branch_id' => 1,
+                'type' => Employee::FRONTDESK,
+            ]);
+        }
     }
 }
