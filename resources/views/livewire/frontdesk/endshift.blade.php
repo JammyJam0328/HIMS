@@ -3,5 +3,5 @@
     <x-confirm name="end-shift"
         title="End Shift"
         message="Are you sure you want to end your shift?"
-        onConfirm="endShift()" />
+        onConfirm="destroyShift()" />
 </div>

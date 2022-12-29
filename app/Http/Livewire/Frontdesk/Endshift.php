@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Endshift extends Component
 {
 
-    public function endShift()
+    public function destroyShift()
     {
         DB::beginTransaction();
         $activeFrontdesk = Frontdesk::whereBranchId(auth()->user()->branch_id)
