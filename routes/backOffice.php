@@ -18,4 +18,7 @@ Route::prefix('back_office')
         Route::get('/add-expenses', function () {
             return view('v1.back-office.add-expenses');
         })->name('back-office.add-expenses');
+        Route::get('/reports', function () {
+            return view('v1.back-office.reports');
+        })->name('back-office.reports');
     });
