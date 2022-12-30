@@ -83,8 +83,28 @@
                                 $checkOutTime = Carbon\Carbon::parse($room->check_out_time);
                             @endphp
                             @if (!$checkOutTime->isPast())
-                                <x-countdown class="text-xl font-extrabold text-red-600"
-                                    :expires="$checkOutTime" />
+                                <x-countdown :expires="$checkOutTime">
+                                    <div class="flex space-x-2"
+                                        x-bind:class="timer.hours == '00' ? 'text-red-600' :
+                                            'text-green-600'">
+                                        <div class="flex space-x-1">
+                                            <span x-text="timer.days">{{ $component->days() }}</span>
+                                            <span> days -</span>
+                                        </div>
+                                        <div class="flex space-x-1">
+                                            <span x-text="timer.hours">{{ $component->hours() }}</span>
+                                            <span> hours -</span>
+                                        </div>
+                                        <div class="flex space-x-1">
+                                            <span x-text="timer.minutes">{{ $component->minutes() }}</span>
+                                            <span> minutes -</span>
+                                        </div>
+                                        <div class="flex space-x-1">
+                                            <span x-text="timer.seconds">{{ $component->seconds() }}</span>
+                                            <span>seconds</span>
+                                        </div>
+                                    </div>
+                                </x-countdown>
                             @else
                                 <span class="text-red-600">
                                     Check out overdue

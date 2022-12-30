@@ -20,7 +20,7 @@
         </x-table.head-actions>
         <div wire:key="guest">
             @if ($guest)
-                <div class="mb-3 flex justify-end space-x-3">
+                <div class="flex justify-end mb-3 space-x-3">
                     <x-button.danger wire:click="validateCheckOut">Check Out</x-button.danger>
                 </div>
                 <div id="view"
@@ -46,7 +46,7 @@
                             @foreach ($groupedTransactions as $type => $transactions)
                                 <x-table.row>
                                     <x-table.cell colspan="4"
-                                        class="bg-gray-100 px-6 py-3 text-center text-sm font-medium uppercase text-gray-900">
+                                        class="px-6 py-3 text-sm font-medium text-center text-gray-900 uppercase bg-gray-100">
                                         {{ \App\Models\Transaction::TYPES[$type] }}
                                     </x-table.cell>
                                 </x-table.row>
@@ -61,6 +61,8 @@
                                         <x-table.cell>
                                             @if ($transaction->paid_at)
                                                 {{ \Carbon\Carbon::parse($transaction->paid_at)->format('M d, Y h:i A') }}
+                                            @else
+                                                <x-button.pay-transaction :transactionId="$transaction->id" />
                                             @endif
                                         </x-table.cell>
                                         <x-table.cell>
@@ -78,12 +80,12 @@
                     </div>
                     <div wire:key="info"
                         class="col-span-3">
-                        <div class="rounded-lg border-2 border-green-600 bg-gray-50 p-4 shadow-sm">
+                        <div class="p-4 border-2 border-green-600 rounded-lg shadow-sm bg-gray-50">
                             <div>
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">
                                     Guest Information
                                 </h3>
-                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                <p class="max-w-2xl mt-1 text-sm text-gray-500">
                                     Personal details and check in information
                                 </p>
                             </div>

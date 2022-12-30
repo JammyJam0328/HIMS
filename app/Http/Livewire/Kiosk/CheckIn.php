@@ -164,6 +164,8 @@ class CheckIn extends Component
     {
         $this->isLongStay = true;
         $this->step = 4;
+        $this->getCheckInDetails();
+
     }
 
     public function mount()
@@ -192,6 +194,9 @@ class CheckIn extends Component
 
         $this->roomType = Type::find($this->typeId)->name;
         $this->roomRate = $this->isLongStay ? Rate::whereTypeId($this->typeId)->whereHas('stayingHour', fn ($query) => $query->where('number', 24))->first() : Rate::find($this->rateId);
+        if ($this->isLongStay) {
+            $this->rateId = $this->roomRate->id;
+        }
     }
 
     public function checkIn()

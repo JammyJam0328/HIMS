@@ -60,7 +60,7 @@ class Index extends Component
     {
         $hasUnpaidTransaction = Transaction::query()
             ->whereGuestId($this->guest->id)
-            ->wherePaidAt(false)
+            ->whereNull('paid_at')
             ->exists();
         if ($hasUnpaidTransaction) {
             $this->dispatchBrowserEvent('alert', [
