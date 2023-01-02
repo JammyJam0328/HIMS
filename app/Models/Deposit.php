@@ -12,9 +12,10 @@ class Deposit extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'frontdesks' => AsCollection::class,
-    ];
+    public function frontdesks()
+    {
+        return \json_decode($this->frontdesks);
+    }
 
     public function branch()
     {

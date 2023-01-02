@@ -12,21 +12,23 @@
                             <x-table.head>Time Started</x-table.head>
                             <x-table.head>Actions</x-table.head>
                         </x-slot:header>
-                        <x-table.row wire:key="asdoisajdiljas">
-                            <x-table.cell>
-                                <span class="text-xl text-bold">
-                                    {{ auth()->user()->roomBoyRoom->numberWithFormat() }}
-                                </span>
-                            </x-table.cell>
-                            <x-table.cell>
-                                {{ \Carbon\Carbon::parse(auth()->user()->roomBoyRoom->started_cleaning_at)->diffForHumans() }}
-                            </x-table.cell>
-                            <x-table.cell>
-                                <x-button.danger x-on:click="$dispatch('confirm-finish-cleaning')">
-                                    Finish
-                                </x-button.danger>
-                            </x-table.cell>
-                        </x-table.row>
+                        @if (auth()->user()->room_boy_cleaning_room_id)
+                            <x-table.row wire:key="asdoisajdiljas">
+                                <x-table.cell>
+                                    <span class="text-xl text-bold">
+                                        {{ auth()->user()->roomBoyRoom->numberWithFormat() }}
+                                    </span>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    {{ \Carbon\Carbon::parse(auth()->user()->roomBoyRoom->started_cleaning_at)->diffForHumans() }}
+                                </x-table.cell>
+                                <x-table.cell>
+                                    <x-button.danger x-on:click="$dispatch('confirm-finish-cleaning')">
+                                        Finish
+                                    </x-button.danger>
+                                </x-table.cell>
+                            </x-table.row>
+                        @endif
                     </x-table>
                 </div>
                 <div class="grid gap-4">

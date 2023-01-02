@@ -164,6 +164,13 @@
                                                 </option>
                                             </x-select>
                                         </div>
+
+                                        <div class="grid gap-1">
+                                            <x-input-label value="Reason" />
+                                            <x-text-input wire:model.defer="transferReason"
+                                                type="text"
+                                                placeholder="Reason" />
+                                        </div>
                                         <div class="grid gap-1">
                                             <x-input-label value="Enter ADMINISTRATOR CODE" />
                                             <x-text-input wire:model.defer="settingAdministratorCode"

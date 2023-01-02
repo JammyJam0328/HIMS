@@ -77,4 +77,13 @@ class Guest extends Model
     {
         return $this->hasMany(Deposit::class);
     }
+    public function roomCheckinInterval()
+    {
+        return $this->hasOne(RoomCheckinInterval::class);
+    }
+
+    public function roomTransfers()
+    {
+        return $this->hasMany(RoomTransfer::class);
+    }
 }
