@@ -174,7 +174,7 @@
                     <x-table.head>Time Started</x-table.head>
                     <x-table.head>Actions</x-table.head>
                   </x-slot:header>
-                  <x-table.row wire:key="asdoisajdiljas">
+                  <x-table.row wire:key="asdoisajdiljassd">
                     <x-table.cell>
                       <span class="text-xl text-bold">
                         {{ auth()->user()->roomBoyRoom->numberWithFormat() }}
