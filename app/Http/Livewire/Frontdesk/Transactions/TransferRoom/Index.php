@@ -2,19 +2,20 @@
 
 namespace App\Http\Livewire\Frontdesk\Transactions\TransferRoom;
 
-use App\Models\Floor;
-use App\Models\Guest;
+use Carbon\Carbon;
 use App\Models\Rate;
 use App\Models\Room;
-use App\Models\RoomCheckinInterval;
-use App\Models\RoomTransfer;
-use App\Models\Transaction;
 use App\Models\Type;
-use App\Traits\WithCaching;
-use Carbon\Carbon;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\DB;
+use App\Models\Floor;
+use App\Models\Guest;
 use Livewire\Component;
+use App\Models\Frontdesk;
+use App\Models\Transaction;
+use App\Traits\WithCaching;
+use App\Models\RoomTransfer;
+use Illuminate\Support\Facades\DB;
+use App\Models\RoomCheckinInterval;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Index extends Component
 {
@@ -33,6 +34,8 @@ class Index extends Component
     public $newRoomId;
 
     public $newRoomNumber;
+
+    public $transferReason;
 
     public $newRoomTypeId;
 
@@ -154,6 +157,7 @@ class Index extends Component
         $this->validate([
             'newRoomId' => 'required',
             'settingAdministratorCode' => 'required|in:'.auth()->user()->branch->setting_administrator_code,
+            'transferReason' => 'required | max:255',
         ]);
 
         DB::beginTransaction();
@@ -242,6 +246,17 @@ class Index extends Component
             ]);
         }
 
+
+        $frontdesks = Frontdesk::whereBranchId(auth()->user()->branch_id)
+        ->whereActive(true)
+        ->with('employee')
+        ->get()->map(function ($frontdesk) {
+            return [
+                'id' => $frontdesk->id,
+                'name' => $frontdesk->employee->name,
+            ];
+        })->toArray();
+
         RoomTransfer::create([
             'branch_id' => auth()->user()->branch_id,
             'guest_id' => $this->guest->id,
@@ -253,6 +268,9 @@ class Index extends Component
             'from_room_type' => $oldRoom->type->name,
             'to_room_number' => $newRoom->number,
             'to_room_type' => $newRoom->type->name,
+            'reason' => $this->reason,
+            'frontdesks'=>json_encode($frontdesks),
+            'transact_by_admin'=>auth()->user()->hasRole('admin') ? auth()->user()->id : null
         ]);
 
         $this->oldRoomAmount = $this->newRoomAmount;

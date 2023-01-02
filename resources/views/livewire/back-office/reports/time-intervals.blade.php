@@ -10,39 +10,27 @@
 }">
     <div class="flex items-center justify-between">
         <div class="flex items-center space-x-1">
-            <input type="date"
-                wire:model="date"
-                class="h-10 text-gray-600 border-gray-300 rounded-lg"
-                name=""
-                id="">
-            @error('date')
-                <span class="text-xs text-red-500">{{ $message }}</span>
-            @enderror
-            {{-- @if ($date != null)
-          <x-button id="dsdsd" wire:click="generate" dark label="GENERATE" spinner="generate"
-            class="font-semibold" />
-        @endif --}}
-            <x-select wire:model="shift">
-                <option>Select Shift</option>
-                <option value="AM">AM Shift (8:00am - 8:00pm)</option>
-                <option value="PM">PM Shift (8:00pm - 8:00am)</option>
-            </x-select>
+            <div>
+                <div class="flex space-x-3">
+                    <input type="date"
+                        wire:model="date"
+                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        placeholder="you@example.com">
+                    <x-select wire:model="shift">
+                        <option>Select Shift</option>
+                        <option value="AM">AM Shift (8:00am - 8:00pm)</option>
+                        <option value="PM">PM Shift (8:00pm - 8:00am)</option>
+                    </x-select>
+                </div>
+            </div>
         </div>
         <div class="flex space-x-1">
-            <x-button.primary x-on:click="printDiv('pritable')">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    class="h-6 fill-white">
-                    <path fill="none"
-                        d="M0 0h24v24H0z" />
-                    <path
-                        d="M6 19H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-3v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm0-2v-1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1h2V9H4v8h2zM8 4v3h8V4H8zm0 13v3h8v-3H8zm-3-7h3v2H5v-2z" />
-                </svg>
-            </x-button.primary>
+            <x-button.primary x-on:click="printDiv('printContainer')"> Print </x-button.primary>
         </div>
     </div>
     <div class="p-5 mt-5 border-2">
-        <div id="pritable">
+        <div id="printContainer"
+            class="flex flex-col mt-5">
             <div class="flex items-center space-x-2 text-gray-700">
                 <svg class="w-10 h-10"
                     fill="currentColor"
@@ -59,7 +47,7 @@
                 </div>
             </div>
             <div class="mt-10 text-2xl font-bold text-center text-gray-700">
-                <h1>OVERDUE ROOMS REPORT
+                <h1>TIME INTERVAL REPORT
                     @if ($shift == 'AM')
                         (AM Shift)
                     @elseif($shift == 'PM')
@@ -69,44 +57,65 @@
                 </h1>
                 {{-- @if ($date)
             <p class="text-sm font-semibold">({{ \Carbon\Carbon::parse($date)->format('F d, Y') }})</p>
+            @if ($shift)
+              <p class="text-sm font-semibold underline">
+                {{ $shift == 1 ? '1st Shift (8:00am - 8:00pm)' : '2nd Shift (8:00pm - 8:00am)' }}</p>
+            @endif
           @endif --}}
             </div>
+
             <table id="example"
                 class="mt-5 table-auto"
                 style="width:100%">
                 <thead class="font-normal">
                     <tr>
-                        <th class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">
-                            OVERDUE
-                            ROOM</th>
-                        <th class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">
-                            ASSIGNED
-                            ROOMBOY
+                        <th width="150"
+                            class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">
                         </th>
                         <th class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">
-                            EXPECTED
-                            TIME
+                            CHECK IN
                         </th>
-                        <th class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">TIME
-                            ENDED</th>
+                        <th class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">CHECK
+                            OUT</th>
+                        <th class="px-2 py-2 text-sm font-semibold text-left text-gray-700 border border-gray-700">ROOM
+                            INTERVAL
+                        </th>
                     </tr>
                 </thead>
+                {{-- @php
+            $checkIns = App\Models\Room::whereIn('id', $checkInDetails)->get();
+          @endphp --}}
                 <tbody class="">
-                    @foreach ($cleaningHistories as $cleaningHistory)
+                    @foreach ($room_checkin_intervals as $roomId => $room_checkin_interval)
                         <tr>
-                            <td class="px-3 py-1 border border-gray-700">
-                                {{ $cleaningHistory->room->numberWithFormat() }}
-                            </td>
-                            <td class="px-3 py-1 border border-gray-700">
-                                {{ $cleaningHistory->user->name }}
-                            </td>
-                            <td class="px-3 py-1 border border-gray-700">
-                                {{ \Carbon\Carbon::parse($cleaningHistory->expected_end_time)->format('M d, Y h:i A') }}
-                            </td>
-                            <td class="px-3 py-1 border border-gray-700">
-                                {{ \Carbon\Carbon::parse($cleaningHistory->end_time)->format('M d, Y h:i A') }}
+                            <td colspan="4"
+                                class="px-3 py-1 font-bold text-gray-700 bg-gray-100 border border-gray-700">
+                                {{ $rooms->find($roomId)->numberWithFormat() }}
                             </td>
                         </tr>
+                        @foreach ($room_checkin_interval as $interval)
+                            <tr>
+                                <td class="px-3 py-1 border border-gray-700"></td>
+                                <td class="px-3 py-1 border border-gray-700">
+                                    {{ \Carbon\Carbon::parse($interval->guest->checked_in_at)->format('M d Y h:i A') }}
+                                </td>
+                                <td class="px-3 py-1 border border-gray-700">
+                                    {{ \Carbon\Carbon::parse($interval->guest->checked_out_at)->format('M d Y h:i A') }}
+                                </td>
+                                <td class="px-3 py-1 border border-gray-700">
+                                    @if ($interval->duration)
+                                        @php
+                                            $duration = $interval->duration;
+                                            $hours = floor($duration / 60);
+                                            $minutes = $duration % 60;
+                                        @endphp
+                                        {{ \Str::plural($hours . ' hr', $hours) . ' ' . \Str::plural($minutes . ' min', $minutes) }}
+                                    @else
+                                        <span class="text-red-500">No Duration</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>

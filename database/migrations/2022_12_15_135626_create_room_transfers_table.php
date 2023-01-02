@@ -30,6 +30,10 @@ return new class extends Migration
 
             $table->string('to_room_number');
             $table->string('to_room_type');
+
+            $table->text('reason')->nullable();
+            $table->text('frontdesks');
+            $table->unsignedBigInteger('transact_by_admin')->nullable(); // if the admin did the transaction
             $table->timestamps();
         });
     }

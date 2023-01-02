@@ -89,4 +89,8 @@ class Room extends Model
         return $this->hasMany(CleaningHistory::class);
     }
 
+    public function roomCheckinInterval()
+    {
+        return $this->hasMany(RoomCheckinInterval::class);
+    }
 }

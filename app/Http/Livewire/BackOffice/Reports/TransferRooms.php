@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\BackOffice\Reports;
 
+use App\Models\RoomTransfer;
 use Livewire\Component;
-use App\Models\CleaningHistory;
 
-class OverdueRooms extends Component
+class TransferRooms extends Component
 {
     public $date = null;
 
@@ -13,21 +13,18 @@ class OverdueRooms extends Component
 
     public function render()
     {
-        return view('livewire.back-office.reports.overdue-rooms', [
-            'cleaningHistories' => $this->date ? CleaningHistory::whereHas('room', function ($query) {
-                $query->where('branch_id', auth()->user()->branch_id);
-            })
-                ->whereDelayedCleaning(true)
+        return view('livewire.back-office.reports.transfer-rooms', [
+            'transferRooms' => $this->date ? RoomTransfer::whereBranchId(auth()->user()->branch_id)
                 ->when($this->date, function ($query) {
                     if ($this->shift == 'AM') {
                         $query->whereBetween('created_at', [
-                            \Carbon\Carbon::parse($this->date)->format('Y-m-d 08:00:00'), 
+                            \Carbon\Carbon::parse($this->date)->format('Y-m-d 08:00:00'),
                             \Carbon\Carbon::parse($this->date)->format('Y-m-d 19:59:59')
                         ]);
                     } else if ($this->shift == 'PM') {
                         $nextDay = \Carbon\Carbon::parse($this->date)->addDay()->format('Y-m-d 07:59:59');
                         $query->whereBetween('created_at', [
-                            \Carbon\Carbon::parse($this->date)->format('Y-m-d 20:00:00'), 
+                            \Carbon\Carbon::parse($this->date)->format('Y-m-d 20:00:00'),
                             $nextDay
                         ]);
                     } else {
@@ -35,6 +32,7 @@ class OverdueRooms extends Component
                         $query->whereBetween('created_at', [\Carbon\Carbon::parse($this->date)->format('Y-m-d 08:00:00'), $nextDay]);
                     }
                 })
+                ->with(['guest'])
                 ->get() : [],
         ]);
     }
