@@ -1,5 +1,5 @@
 <div x-data="{
-    tab: {{ $categories->first()->id }},
+    tab: {{ count($categories) > 0 ? $categories->first()->id : 0 }},
     hasGuest: $wire.entangle('hasGuest'),
     orders: $wire.entangle('orders').defer,
     pushOrder(id, name, quantity, price) {
@@ -73,8 +73,8 @@
             {{-- menu list --}}
 
             <div class="flex h-[33rem] justify-between">
-                <div class="mx-5 flex-1">
-                    <div class="mt-5 grid grid-cols-7 gap-3">
+                <div class="flex-1 mx-5">
+                    <div class="grid grid-cols-7 gap-3 mt-5">
                         @foreach ($categories as $categoryItem)
                             <button type="button"
                                 x-on:click="tab = {{ $categoryItem->id }}"
@@ -83,8 +83,8 @@
                                     'border border-green-600 text-green-700': tab === {{ $categoryItem->id }},
                                     'bg-gray-200 text-gray-500': tab !== {{ $categoryItem->id }},
                                 }"
-                                class="shado grid h-12 place-content-center rounded-lg border p-1">
-                                <p class="text-center text-sm font-semibold uppercase">
+                                class="grid h-12 p-1 border rounded-lg shado place-content-center">
+                                <p class="text-sm font-semibold text-center uppercase">
                                     {{ $categoryItem->name }}
                                 </p>
                             </button>
@@ -94,20 +94,20 @@
                         <div x-show="tab=={{ $category->id }}"
                             x-cloak
                             wire:key="menu{{ $category->id }}"
-                            class="mt-5 mb-6 grid grid-cols-4 gap-4">
+                            class="grid grid-cols-4 gap-4 mt-5 mb-6">
                             @forelse ($category->menus as $menu)
                                 <div x-on:click="pushOrder({{ $menu->id }}, '{{ $menu->name }}', 1, {{ $menu->price }})"
                                     class="h-[15.5 rem] cursor-pointer rounded-xl bg-gray-50 p-2 shadow hover:border-2 hover:border-green-600">
-                                    <div class="relative h-40 rounded-xl bg-gray-500 shadow">
+                                    <div class="relative h-40 bg-gray-500 shadow rounded-xl">
                                         <img src="{{ asset('images/no-image-available.png') }}"
-                                            class="h-full w-full rounded-xl object-cover opacity-50"
+                                            class="object-cover w-full h-full opacity-50 rounded-xl"
                                             alt="">
                                         <div class="absolute top-2 right-2">
                                             <div
-                                                class="grid h-10 w-10 place-content-center rounded-xl bg-white bg-opacity-20">
+                                                class="grid w-10 h-10 bg-white place-content-center rounded-xl bg-opacity-20">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 24 24"
-                                                    class="h-5 w-5 fill-green-500">
+                                                    class="w-5 h-5 fill-green-500">
                                                     <path fill="none"
                                                         d="M0 0h24v24H0z" />
                                                     <path
@@ -132,13 +132,13 @@
                 </div>
                 {{-- order summary --}}
                 <div id="orderSummary"
-                    class="relative w-96 rounded-2xl border p-5 shadow">
+                    class="relative p-5 border shadow w-96 rounded-2xl">
                     <div x-cloak
                         x-show="hasGuest"
                         id="orderContainer">
                         <header class="flex items-center justify-between">
                             <h1 class="text-lg font-bold text-gray-600">Current Order</h1>
-                            <button class="grid h-9 w-9 place-content-center rounded-lg bg-gray-100"><svg
+                            <button class="grid bg-gray-100 rounded-lg h-9 w-9 place-content-center"><svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     class="fill-gray-600"
@@ -154,13 +154,13 @@
                             {{-- orders --}}
                             <template x-for="(order,index) in orders"
                                 :key="order.id">
-                                <div class="order relative flex space-x-2 rounded-lg bg-gray-50 p-2">
-                                    <div class="absolute -top-2 -right-3 grid place-content-center">
+                                <div class="relative flex p-2 space-x-2 rounded-lg order bg-gray-50">
+                                    <div class="absolute grid -top-2 -right-3 place-content-center">
                                         <button x-on:click="removeOrder(order.id)"
                                             class="fill-red-500 hover:fill-red-700">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                class="h-6 w-6">
+                                                class="w-6 h-6">
                                                 <path fill="none"
                                                     d="M0 0h24v24H0z" />
                                                 <path
@@ -168,17 +168,17 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <div class="grid h-12 w-12 place-content-center rounded-lg bg-green-600">
+                                    <div class="grid w-12 h-12 bg-green-600 rounded-lg place-content-center">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
-                                            class="h-6 w-6 fill-white">
+                                            class="w-6 h-6 fill-white">
                                             <path fill="none"
                                                 d="M0 0h24v24H0z" />
                                             <path
                                                 d="M15.366 3.438L18.577 9H22v2h-1.167l-.757 9.083a1 1 0 0 1-.996.917H4.92a1 1 0 0 1-.996-.917L3.166 11H2V9h3.422l3.212-5.562 1.732 1L7.732 9h8.535l-2.633-4.562 1.732-1zM13 13h-2v4h2v-4zm-4 0H7v4h2v-4zm8 0h-2v4h2v-4z" />
                                         </svg>
                                     </div>
-                                    <div class="flex-1 flex-col">
+                                    <div class="flex-col flex-1">
                                         <h1 class="font-semibold text-gray-600"
                                             x-text="order.name"></h1>
                                         <div class="flex justify-between">
@@ -206,19 +206,19 @@
                             <div class="flex flex-col space-y-3">
                                 <div
                                     class="relative flex h-40 flex-col justify-between overflow-hidden rounded-lg bg-gray-100 before:absolute before:bottom-[2.5rem] before:-left-2 before:h-5 before:w-5 before:rounded-full before:bg-white after:absolute after:bottom-[2.5rem] after:-right-2 after:h-5 after:w-5 after:rounded-full after:bg-white">
-                                    <div class="flex flex-1 flex-col justify-between">
+                                    <div class="flex flex-col justify-between flex-1">
                                         <section class="p-3">
-                                            <h1 class="font-bold uppercase text-gray-600">Order Summary</h1>
+                                            <h1 class="font-bold text-gray-600 uppercase">Order Summary</h1>
                                             <h1 class="text-xs leading-3 text-red-500">
                                                 {{ $guest ? $guest->name : '' }}
                                             </h1>
-                                            <div class="mt-4 flex justify-between text-gray-600">
+                                            <div class="flex justify-between mt-4 text-gray-600">
                                                 <dt>Subtotal</dt>
                                                 <dd class="">&#8369; <span x-text="getSubTotal()"></span>
                                                 </dd>
                                             </div>
                                         </section>
-                                        <section class="border border-dashed border-gray-400"></section>
+                                        <section class="border border-gray-400 border-dashed"></section>
                                     </div>
                                     <section class="p-3">
                                         <div class="flex justify-between text-green-600">
@@ -231,15 +231,15 @@
                                 </div>
                                 <button x-on:click="hasGuest ? $dispatch('confirm-order') : ''"
                                     x-bind:disabled="!hasGuest || !orders.length"
-                                    class="rounded-lg bg-green-500 py-2 font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed">
+                                    class="py-2 font-semibold text-white bg-green-500 rounded-lg hover:bg-green-600 disabled:cursor-not-allowed">
                                     <span>Check Order</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div x-show="!hasGuest"
-                        class="flex h-full w-full items-center justify-center">
-                        <span class="font-semibold uppercase text-red-600">
+                        class="flex items-center justify-center w-full h-full">
+                        <span class="font-semibold text-red-600 uppercase">
                             Please select guest !
                         </span>
                     </div>

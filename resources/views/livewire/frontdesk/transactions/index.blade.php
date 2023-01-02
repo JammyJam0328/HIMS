@@ -13,7 +13,7 @@
                         ROOM NUMBER
                     </option>
                 </x-select>
-                <x-button.primary wire:click="search">
+                <x-button.primary wire:click="search(true)">
                     Search
                 </x-button.primary>
             </x-slot:left>
@@ -29,12 +29,12 @@
                     class="grid grid-cols-12 gap-5">
                     <div wire:key="info"
                         class="col-span-3">
-                        <div class="rounded-lg border-2 border-green-600 bg-gray-50 p-4 shadow-sm">
+                        <div class="p-4 border-2 border-green-600 rounded-lg shadow-sm bg-gray-50">
                             <div>
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">
                                     Guest Information
                                 </h3>
-                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                <p class="max-w-2xl mt-1 text-sm text-gray-500">
                                     Personal details and check in information
                                 </p>
                             </div>
@@ -123,7 +123,7 @@
                             @foreach ($groupedTransactions as $type => $transactions)
                                 <x-table.row>
                                     <x-table.cell colspan="4"
-                                        class="bg-gray-100 px-6 py-3 text-center text-sm font-medium uppercase text-gray-900">
+                                        class="px-6 py-3 text-sm font-medium text-center text-gray-900 uppercase bg-gray-100">
                                         {{ \App\Models\Transaction::TYPES[$type] }}
                                     </x-table.cell>
                                 </x-table.row>

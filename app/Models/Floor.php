@@ -16,6 +16,11 @@ class Floor extends Model
         return $this->hasMany(Room::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function numberWithFormat()
     {
         $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];

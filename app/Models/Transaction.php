@@ -60,4 +60,9 @@ class Transaction extends Model
     {
         return \json_decode($this->frontdesks);
     }
+
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class);
+    }
 }

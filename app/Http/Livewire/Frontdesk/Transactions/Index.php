@@ -22,8 +22,11 @@ class Index extends Component
         'guestId' => ['except' => ''],
     ];
 
-    public function search()
+    public function search($fromButton = false)
     {
+        if ($fromButton) {
+            $this->guestId = null;
+        }
         $this->guest = Guest::query()
             ->when($this->search, function ($query) {
                 if ($this->searchBy == 'QRCODE') {

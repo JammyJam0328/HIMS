@@ -84,4 +84,9 @@ class Room extends Model
         return $this->belongsTo(User::class,'room_boy_cleaning_room_id');
     }
 
+    public function cleaningHistories()
+    {
+        return $this->hasMany(CleaningHistory::class);
+    }
+
 }

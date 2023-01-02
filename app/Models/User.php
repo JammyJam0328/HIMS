@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $this->belongsTo(Room::class,'room_boy_cleaning_room_id');
     }
 
+    public function cleaningHistories()
+    {
+        return $this->hasMany(CleaningHistory::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

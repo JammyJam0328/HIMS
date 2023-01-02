@@ -67,6 +67,7 @@ class Index extends Component
                 'current_assigned_floor_id'=>auth()->user()->room_boy_assigned_floor_id == $room->floor_id ? true : false,
                 'start_time'=>$room->started_cleaning_at,
                 'end_time'=>now(),
+                'expected_end_time'=>$room->time_to_clean,
                 'cleaning_duration'=>now()->diffInMinutes($room->started_cleaning_at),
                 'delayed_cleaning'=>\Carbon\Carbon::parse($room->time_to_clean)->isPast() ? true : false,
             ]);
