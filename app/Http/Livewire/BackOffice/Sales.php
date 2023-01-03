@@ -12,21 +12,16 @@ class Sales extends Component
 
     public function mount()
     {
-        $this->floors = Floor::where(
-            'branch_id',
-            auth()->user()->branch_id
-        )->get();
+        $this->floors = Floor::where('branch_id',auth()->user()->branch_id)->get();
     }
+ 
     public function render()
     {
         return view('livewire.back-office.sales', [
-            'sales' => Transaction::where(
-                'branch_id',
-                auth()->user()->branch_id
-            )
-                ->sum('payable_amount')
+            'sales' => Transaction::where('branch_id',auth()->user()->branch_id)
+                ->where('paid_at','!=',null)
                 ->get()
-                ->groupBy('floor_id'),
+                ->groupBy('floor_id')
         ]);
     }
 }
