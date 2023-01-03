@@ -262,4 +262,6 @@
         title="Confirm"
         message="Are you sure you want to transfer this guest?"
         onConfirm="transferRoom()" />
+    @include('v1.partials.validation-errors')
+
 </div>

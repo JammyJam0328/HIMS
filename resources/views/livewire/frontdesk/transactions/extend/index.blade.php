@@ -179,4 +179,6 @@
         title="Confirm"
         message="Are you sure you want to extend this transaction?"
         onConfirm="saveExtend()" />
+    @include('v1.partials.validation-errors')
+
 </div>

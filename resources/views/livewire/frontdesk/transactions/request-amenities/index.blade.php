@@ -180,4 +180,6 @@
         title="Confirm"
         message="Are you sure you want to save this request?"
         onConfirm="saveRequest()" />
+    @include('v1.partials.validation-errors')
+
 </div>

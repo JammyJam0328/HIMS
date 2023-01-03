@@ -47,6 +47,9 @@ class Index extends Component
         $this->validate([
             'assetId' => 'required|in:'.$this->assets->pluck('id')->implode(','),
             'additionalAmount' => 'nullable|numeric|min:0',
+        ],[
+            'assetId.required' => 'Please select an asset',
+            'assetId.in' => 'Asset is invalid',
         ]);
         DB::beginTransaction();
 
