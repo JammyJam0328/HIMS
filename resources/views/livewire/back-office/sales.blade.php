@@ -1,6 +1,6 @@
 <div x-data="{
     printDiv(divName) {
-        document.title = 'Occupied Room {{ now()->format('d-m-Y') }}';
+        document.title = 'Sales Room {{ now()->format('M d Y') }}';
         var printContents = document.getElementById(divName).innerHTML;
         var originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;
@@ -10,19 +10,25 @@
 }">
     <div class="flex items-center justify-between">
         <div class="flex space-x-1">
-            {{-- <x-native-select wire:model="report_type">
-        <option selected>Select Report</option>
-        <option value="1">First shift AM 8: AM - 8 PM</option>
-        <option value="2">2nd Shift 8 PM-8 AM</option>
-      </x-native-select> --}}
-            {{-- @if ($report_type != null)
-        <x-native-select wire:model="floor_id">
-          <option selected>Select Floor</option>
-          @foreach ($floors as $floor)
-            <option value="{{ $floor->id }}">{{ $floor->number }}</option>
-          @endforeach
-        </x-native-select>
-      @endif --}}
+            <div class="flex items-center space-x-1">
+                <input type="date"
+                    wire:model="date"
+                    class="h-10 text-gray-600 border-gray-300 rounded-lg"
+                    name=""
+                    id="">
+                @error('date')
+                    <span class="text-xs text-red-500">{{ $message }}</span>
+                @enderror
+                {{-- @if ($date != null)
+          <x-button id="dsdsd" wire:click="generate" dark label="GENERATE" spinner="generate"
+            class="font-semibold" />
+        @endif --}}
+                <x-select wire:model="shift">
+                    <option>Select Shift</option>
+                    <option value="AM">AM Shift (8:00am - 8:00pm)</option>
+                    <option value="PM">PM Shift (8:00pm - 8:00am)</option>
+                </x-select>
+            </div>
         </div>
         <div class="flex space-x-1">
             <x-button.primary x-on:click="printDiv('printContainer')">

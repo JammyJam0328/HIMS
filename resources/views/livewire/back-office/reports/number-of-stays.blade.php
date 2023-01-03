@@ -1,6 +1,6 @@
 <div x-data="{
     printDiv(divName) {
-        document.title = 'Occupied Room {{ now()->format('d-m-Y') }}';
+        document.title = 'Number Of Stays {{ now()->format('M d Y') }}';
         var printContents = document.getElementById(divName).innerHTML;
         var originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;
