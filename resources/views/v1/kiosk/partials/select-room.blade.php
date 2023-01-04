@@ -1,25 +1,34 @@
 <div class="grid p-10 px-20">
-  {{-- <div class="grid gap-4">
-        <h1 class="text-3xl text-green-400 underline uppercase">
-            CHECK IN
-        </h1>
-        <h1 class="text-5xl font-bold text-white underline uppercase">
-            SELECT ROOM
-        </h1>
-    </div> --}}
-  <div>
-    <h1 class="font-bold text-green-400">CHECK-IN</h1>
-    <h1 class="text-5xl uppercase font-extrabold text-gray-50">Select room</h1>
+
+  <div class="flex items-end justify-between">
+    <div>
+      <h1 class="font-bold text-green-400">CHECK-IN</h1>
+      <h1 class="text-5xl uppercase font-extrabold text-gray-50">Select room </h1>
+    </div>
+    <div>
+      @if ($step == 1)
+        <a href="{{ route('kiosk.index') }}"
+          class="bg-gradient-to-r from-red-500 via-red-500 to-transparent p-2 px-4 flex space-x-1 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 text-white h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+          </svg>
+          <span class="font-semibold text-gray-100 uppercase">Back</span>
+        </a>
+      @else
+        <button x-on:click="step--"
+          class="bg-gradient-to-r from-red-500 via-red-500 to-transparent p-2 px-4 flex space-x-1 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 text-white h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+          </svg>
+          <span class="font-semibold text-gray-100 uppercase">Back</span>
+        </button>
+      @endif
+    </div>
   </div>
   <div class="mt-20">
     <div class="grid grid-cols-5 gap-5">
-      {{-- @foreach ($rooms as $room)
-        <button wire:key="{{ $room->id }}room"
-          x-on:click="$wire.getRates({{ $room->id }},{{ $room->floor_id }}); step = 3;" type="button"
-          class="p-16 text-2xl font-bold text-white uppercase border-2 shadow-lg rounded-xl bg-white/30 focus:bg-white/50">
-          {{ $room->numberWithFormat() }}
-        </button>
-      @endforeach --}}
 
       @foreach ($rooms as $room)
         <button wire:key="{{ $room->id }}room"

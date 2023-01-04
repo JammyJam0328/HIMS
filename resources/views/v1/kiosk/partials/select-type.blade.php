@@ -1,7 +1,30 @@
 <div class="grid p-10 px-20">
-  <div>
-    <h1 class="font-bold text-green-400">CHECK-IN</h1>
-    <h1 class="text-5xl uppercase font-extrabold text-gray-50">Select room type</h1>
+  <div class="flex items-end justify-between">
+    <div>
+      <h1 class="font-bold text-green-400">CHECK-IN</h1>
+      <h1 class="text-5xl uppercase font-extrabold text-gray-50">Select room type</h1>
+    </div>
+    <div>
+      @if ($step == 1)
+        <a href="{{ route('kiosk.index') }}"
+          class="bg-gradient-to-r from-red-500 via-red-500 to-transparent p-2 px-4 flex space-x-1 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 text-white h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+          </svg>
+          <span class="font-semibold text-gray-100 uppercase">Back</span>
+        </a>
+      @else
+        <button x-on:click="step--"
+          class="bg-gradient-to-r from-red-500 via-red-500 to-transparent p-2 px-4 flex space-x-1 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 text-white h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+          </svg>
+          <span class="font-semibold text-gray-100 uppercase">Back</span>
+        </button>
+      @endif
+    </div>
   </div>
   <div class="mt-10">
     <div class="flex space-x-5">
@@ -17,7 +40,8 @@
       @endforeach --}}
 
       @foreach ($types as $type)
-        <button wire:key="{{ $type->id }}" x-on:click="$wire.getRooms({{ $type->id }}); step = 2;" type="button">
+        <button wire:key="{{ $type->id }}" x-on:click="$wire.getRooms({{ $type->id }}); step = 2;"
+          type="button">
           <div class="h-56 w-96 rounded-2xl overflow-hidden relative grid place-content-center bg-gray-50">
             <svg class="h-56 absolute -right-10 text-gray-500 opacity-10 top-0" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 28 28" fill="none">
