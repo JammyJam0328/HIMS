@@ -33,7 +33,7 @@
         <livewire:back-office.occupied-room />
       </div>
       <div x-cloak x-show="report == 2">
-        Guest
+        @livewire('back-office.reports.guest')
       </div>
       <div x-cloak x-show="report == 3">
         @livewire('back-office.reports.overdue-rooms')
@@ -123,11 +123,11 @@
         @livewire('back-office.reports.number-of-stays')
       </div>
       <div x-cloak x-show="report == 6">
-      @livewire('back-office.reports.time-intervals')
+        @livewire('back-office.reports.time-intervals')
 
       </div>
       <div x-cloak x-show="report == 7">
-       @livewire('back-office.reports.transfer-rooms')
+        @livewire('back-office.reports.transfer-rooms')
       </div>
       <div x-cloak x-show="report == 8">
         <div x-data>
@@ -228,5 +228,26 @@
 
       </div>
     </div>
+    <script>
+      function printOut(data) {
+        var mywindow = window.open('', 'Report On Guest', 'height=1000,width=1000');
+        mywindow.document.write('<html><head>');
+        mywindow.document.write('<title>Report On Guest</title>');
+        mywindow.document.write(`<link rel="stylesheet" href="{{ Vite::asset('resources/css/app.css') }}" />`);
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close();
+        mywindow.focus();
+        setTimeout(() => {
+          mywindow.print();
+          return true;
+        }, 1000);
+
+
+      }
+    </script>
   </div>
+
 </x-back-office-layout>
