@@ -38,7 +38,7 @@
     <h1 class="text-5xl uppercase font-extrabold">Select Transaction</h1>
   </div>
 
-  <div class="pt-16 px-10 flex items-center space-x-10">
+  <div class="pt-16 px-10 flex items-center space-x-10 s">
     <a href="{{ route('kiosk.check-in') }}"
       class="w-[28rem] border relative h-80 bg-gradient-to-bl overflow-hidden from-green-800 shadow-xl via-green-800 to-transparent rounded-2xl">
       <svg class="h-72 text-white absolute -right-28 opacity-10 top-0" xmlns="http://www.w3.org/2000/svg"
