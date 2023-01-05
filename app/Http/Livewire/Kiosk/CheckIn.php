@@ -203,7 +203,7 @@ class CheckIn extends Component
     {
         $this->validate([
             'name' => 'required',
-            'contactNumber' => 'required',
+            'contactNumber' => 'nullable',
             'roomId' => 'required',
             'typeId' => 'required',
             'floorId' => 'required',
