@@ -1,4 +1,4 @@
-<div>
+<div x-data>
   <div class="flex items-center justify-between">
     <div class="flex items-center space-x-1">
       <div class="flex space-x-3">
